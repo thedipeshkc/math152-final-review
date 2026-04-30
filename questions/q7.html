@@ -3,27 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Q7 — Slope & Linear Functions | Math 152 Final Review</title>
+  <title>Q5 — Lines | Math 152 Final Review</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../shared.css" />
   <style>
-    canvas { display:block; border-radius: var(--r); border: 1px solid var(--border); background: white; width:100%; max-width:480px; }
-    .slope-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
-    .slope-table th { background:var(--bg); padding:8px 12px; text-align:left; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); border-bottom:1px solid var(--border); }
-    .slope-table td { padding:10px 12px; border-bottom:1px solid var(--border); line-height:1.5; }
-    .slope-table td:first-child { font-family:var(--mono); font-weight:500; color:var(--blue-800); }
-    .slope-table tr:last-child td { border-bottom:none; }
-    .slope-visual { display:flex; gap:12px; flex-wrap:wrap; margin:12px 0; }
-    .sv-card { flex:1; min-width:120px; border-radius:var(--r); padding:12px 14px; text-align:center; }
-    .sv-card .sv-num { font-size:28px; font-weight:500; font-family:var(--mono); margin-bottom:4px; }
-    .sv-card .sv-lbl { font-size:12px; }
-    .sv-card.pos { background:var(--teal-50); color:var(--teal-800); }
-    .sv-card.neg { background:var(--red-50); color:var(--red-800); }
-    .sv-card.zero { background:var(--blue-50); color:var(--blue-800); }
-    .sv-card.undef { background:var(--amber-50); color:var(--amber-800); }
+    /* ── Tab system ── */
+    .tab-bar { display: flex; gap: 6px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab-btn { padding: 7px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; font-family: var(--sans); transition: all 0.15s; }
+    .tab-btn.active { background: var(--blue-400); color: white; border-color: var(--blue-400); }
+    .tab-btn:hover:not(.active) { background: var(--surface); color: var(--text); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── Slope visual ── */
+    .slope-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; margin: 14px 0; }
+    .slope-card { border-radius: var(--r); padding: 14px; text-align: center; }
+    .slope-card .sc-val  { font-family: var(--mono); font-size: 22px; font-weight: 500; margin-bottom: 6px; }
+    .slope-card .sc-name { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+    .slope-card .sc-desc { font-size: 12px; color: var(--muted); }
+    .slope-card.pos  { background: var(--blue-50);  border: 1px solid var(--blue-100);  color: var(--blue-800); }
+    .slope-card.neg  { background: var(--red-50);   border: 1px solid #F7C1C1;          color: var(--red-800); }
+    .slope-card.zero { background: var(--green-50); border: 1px solid var(--green-100); color: var(--green-800); }
+    .slope-card.undef{ background: var(--amber-50); border: 1px solid var(--amber-100); color: var(--amber-800); }
+
+    /* ── Canvas graph ── */
+    .graph-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--rl); padding: 16px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    canvas { border-radius: var(--r); }
+
+    /* ── Condition pills ── */
+    .cond-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; }
+    .cond-pill { padding: 6px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; font-family: var(--mono); }
+    .cond-pill.par  { background: var(--blue-50);  color: var(--blue-800);  border: 1px solid var(--blue-100); }
+    .cond-pill.perp { background: var(--teal-50);  color: var(--teal-800);  border: 1px solid #9FE1CB; }
+
+    /* ── Formula display ── */
+    .formula-box { background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: var(--r); padding: 12px 16px; margin: 10px 0; }
+    .formula-box .fl { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.07em; color: var(--blue-600); margin-bottom: 6px; }
+    .formula-box .fv { font-family: var(--mono); font-size: 16px; font-weight: 500; color: var(--blue-900); line-height: 1.7; }
+
+    /* ── Distance visual ── */
+    .dist-canvas-wrap { display: flex; justify-content: center; margin: 12px 0; }
+
+    /* ── Rounding box ── */
+    .round-steps { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+    .round-step { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 10px 14px; font-size: 13px; line-height: 1.7; }
+    .round-step strong { color: var(--text); }
+    .round-step .rs-num { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--blue-800); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+    @media(max-width:600px){ .two-col { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
 <nav>
   <div>
     <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
@@ -37,12 +69,15 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="q-badge"><div class="q-dot"></div> Question 7 of 12</div>
-    <h1>Slope, Y-Intercept &amp; Graphing</h1>
+    <div class="q-badge"><div class="q-dot"></div> Question 7 of 12 — Lines master reference</div>
+    <h1>Lines — Everything You Need</h1>
     <div class="q-box">
-      <strong>Question:</strong> List the slope and y-intercept. Then graph.<br>
-      <div class="fn-pills" style="margin-top:10px">
-        <div class="fn-pill">f(x) = 3x − 2</div>
+      <strong>Four topics covered:</strong>
+      <div class="fn-pills">
+        <div class="fn-pill">A · Slope &amp; graphing</div>
+        <div class="fn-pill">B · Distance formula</div>
+        <div class="fn-pill">C · Parallel &amp; perpendicular</div>
+        <div class="fn-pill">D · Equation from graph</div>
       </div>
     </div>
   </div>
@@ -54,211 +89,448 @@
     <div class="prog-step active" id="p1"></div>
     <div class="prog-step" id="p2"></div>
     <div class="prog-step" id="p3"></div>
-    <div class="prog-step" id="p4"></div>
   </div>
   <span class="prog-count" id="prog-count">0 / 3 warmups</span>
 </div>
 
+
 <div class="main">
 
-  <!-- SECTION 1 — concept -->
-  <div class="section">
-    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
-    <div class="card">
-      <p class="explain-text">
-        Any straight line can be written as: &nbsp;<span class="hl">y = mx + b</span>
-      </p>
-
-      <div class="rule-grid" style="margin:14px 0">
-        <div class="rule-card note">
-          <div class="rt">m = slope</div>
-          How steep the line is. Rise ÷ Run. How much y changes per 1 step in x.
-        </div>
-        <div class="rule-card note">
-          <div class="rt">b = y-intercept</div>
-          Where the line crosses the y-axis. The value of y when x = 0.
-        </div>
-      </div>
-
-      <p class="explain-text" style="margin-bottom:12px"><strong>What slope means visually:</strong></p>
-      <div class="slope-visual">
-        <div class="sv-card pos"><div class="sv-num">↗</div><div class="sv-lbl">Positive slope<br>line goes up-right</div></div>
-        <div class="sv-card neg"><div class="sv-num">↘</div><div class="sv-lbl">Negative slope<br>line goes down-right</div></div>
-        <div class="sv-card zero"><div class="sv-num">→</div><div class="sv-lbl">Slope = 0<br>flat horizontal line</div></div>
-        <div class="sv-card undef"><div class="sv-num">↕</div><div class="sv-lbl">Undefined slope<br>vertical line</div></div>
-      </div>
-
-      <p class="explain-text" style="margin-top:12px">
-        <strong>Slope formula from two points (x₁,y₁) and (x₂,y₂):</strong>
-      </p>
-      <div class="math" style="font-size:15px; text-align:center; margin:8px 0;">
-        m = (y₂ − y₁) / (x₂ − x₁) &nbsp; = &nbsp; rise / run
-      </div>
-    </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('a')">A · Slope &amp; graph</button>
+    <button class="tab-btn" onclick="switchTab('b')">B · Distance</button>
+    <button class="tab-btn" onclick="switchTab('c')">C · Parallel &amp; perp</button>
+    <button class="tab-btn" onclick="switchTab('d')">D · Equation from graph</button>
   </div>
 
-  <!-- FULL SLOPE CHEAT SHEET (referenced by Q8, Q9, Q10) -->
-  <div class="section">
-    <div class="sec-header">
-      <div class="sec-chip amber">Lines Master Reference</div>
-      <span class="sec-sub">Q8, Q9, Q10 all use this — screenshot it</span>
-    </div>
-    <div class="cheat">
-      <div class="cheat-top"><div class="cheat-badge">All Line Equations</div><div class="cheat-headline">— slope, forms, parallel, perpendicular</div></div>
+  <!-- ═══════════════ TAB A — Slope & Graphing ═══════════════ -->
+  <div class="tab-pane active" id="tab-a">
 
-      <div class="cheat-row"><div class="cbadge">Slope</div><div class="ctext">m = (y₂ − y₁) / (x₂ − x₁). Rise over run. Subtract y's on top, subtract x's on bottom. <strong>Same order both times.</strong></div></div>
-
-      <div class="cheat-row"><div class="cbadge">Slope-Intercept</div><div class="ctext"><code>y = mx + b</code> — m is slope, b is y-intercept. Best for reading slope and graphing.</div></div>
-
-      <div class="cheat-row"><div class="cbadge">Point-Slope</div><div class="ctext"><code>y − y₁ = m(x − x₁)</code> — use when you know a point (x₁, y₁) and slope m. Best for building an equation from a point.</div></div>
-
-      <div class="cheat-row"><div class="cbadge">Standard Form</div><div class="ctext"><code>Ax + By = C</code> — no fractions, all integers. Convert from slope-intercept by multiplying through.</div></div>
-
-      <div class="cheat-row"><div class="cbadge">Parallel</div><div class="ctext">Same slope, different intercept. If original slope is m, parallel slope is also <code>m</code>.</div></div>
-
-      <div class="cheat-row"><div class="cbadge">Perpendicular</div><div class="ctext">Slope flips and changes sign: <code>−1/m</code> (negative reciprocal). If slope = 3, perpendicular slope = −1/3. If slope = −3/4, perpendicular slope = 4/3.</div></div>
-
-      <div class="cheat-callout">
-        <strong>How to graph:</strong> Plot the y-intercept (0, b). Then use slope = rise/run to find next point. Draw a line through both points.
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip blue">What is slope?</div></div>
+      <div class="card">
+        <p class="explain-text">
+          <strong>Slope</strong> = how steep a line is. It measures how much y changes for every 1 unit x moves right.<br><br>
+          <span class="hl">slope = rise / run</span> &nbsp;=&nbsp; change in y / change in x &nbsp;=&nbsp; (y₂ − y₁) / (x₂ − x₁)
+        </p>
+        <div class="slope-grid">
+          <div class="slope-card pos"><div class="sc-val">m > 0</div><div class="sc-name">Positive slope</div><div class="sc-desc">Line goes up left→right</div></div>
+          <div class="slope-card neg"><div class="sc-val">m < 0</div><div class="sc-name">Negative slope</div><div class="sc-desc">Line goes down left→right</div></div>
+          <div class="slope-card zero"><div class="sc-val">m = 0</div><div class="sc-name">Zero slope</div><div class="sc-desc">Flat horizontal line</div></div>
+          <div class="slope-card undef"><div class="sc-val">m = ?</div><div class="sc-name">Undefined</div><div class="sc-desc">Vertical line (x = k)</div></div>
+        </div>
       </div>
     </div>
 
-    <!-- Slope conditions table -->
-    <div class="card" style="margin-top:10px">
-      <p class="explain-text" style="margin-bottom:10px"><strong>Slope conditions — quick reference</strong></p>
-      <table class="slope-table">
-        <thead><tr><th>Condition</th><th>What it means</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td>m₁ = m₂</td><td>Same slope → Parallel lines (never meet)</td><td>m = 3 and m = 3</td></tr>
-          <tr><td>m₁ × m₂ = −1</td><td>Perpendicular (slopes are negative reciprocals)</td><td>3 × (−1/3) = −1 ✓</td></tr>
-          <tr><td>m = 0</td><td>Horizontal line: y = b</td><td>y = 4</td></tr>
-          <tr><td>m = undefined</td><td>Vertical line: x = a (not a function)</td><td>x = 2</td></tr>
-        </tbody>
-      </table>
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip amber">Cheat sheet — Slope-intercept form</div></div>
+      <div class="cheat">
+        <div class="cheat-top"><div class="cheat-badge">y = mx + b</div><div class="cheat-headline">— the most important form</div></div>
+        <div class="cheat-row"><div class="cbadge">m</div><div class="ctext"><strong>slope</strong> — the number in front of x. Positive = goes up. Negative = goes down.</div></div>
+        <div class="cheat-row"><div class="cbadge">b</div><div class="ctext"><strong>y-intercept</strong> — where the line crosses the y-axis. Plug x = 0 to confirm: y = m(0) + b = b.</div></div>
+        <div class="cheat-row"><div class="cbadge">Graph</div><div class="ctext">① Plot (0, b). ② From there, go <code>up m</code>, <code>right 1</code>. That's a second point. ③ Draw the line.</div></div>
+        <div class="cheat-callout">slope = rise/run. If m = 3 = 3/1, go up 3, right 1. If m = −2/3, go down 2, right 3.</div>
+      </div>
     </div>
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip teal">Solve it — f(x) = 3x − 2</div></div>
+      <div class="solve-card">
+        <div class="step">
+          <div class="snum blue">1</div>
+          <div><div class="stitle">Identify slope and y-intercept</div>
+            <div class="sdesc">f(x) = 3x − 2 is y = mx + b with m = 3, b = −2.</div>
+            <div class="math">slope m = 3</div>
+            <div class="math">y-intercept = (0, −2)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">2</div>
+          <div><div class="stitle">Find a second point using slope = rise/run = 3/1</div>
+            <div class="sdesc">Start at (0, −2). Go up 3, right 1 → new point (1, 1).</div>
+            <div class="math">Point 1: (0, −2) &nbsp;|&nbsp; Point 2: (1, 1)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">3</div>
+          <div><div class="stitle">Graph</div></div>
+        </div>
+        <div class="graph-wrap">
+          <canvas id="graph-a" width="340" height="300"></canvas>
+          <div style="font-size:12px;color:var(--muted)">Blue dot = y-intercept (0,−2) · Orange dot = second point (1,1)</div>
+        </div>
+        <div class="answer">
+          <div class="ans-label">Final Answer</div>
+          <div class="ans-val">Slope = 3 &nbsp;|&nbsp; y-intercept = (0, −2)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Warmups here -->
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip green">Warmup — slope practice</div></div>
+      <div class="warmup-wrap">
+        <div class="wu-title">Read slope and y-intercept from y = mx + b</div>
+        <div class="wu-grid">
+          <div class="wcard" id="wc1">
+            <div class="wq">y = 5x + 3 — what is the slope?</div>
+            <div class="wrow"><input type="number" id="w1" placeholder="m = ?" /><button class="wbtn" onclick="chk(1,5,'w1','fb1','wc1')">Check</button></div>
+            <div class="wfb" id="fb1"></div>
+          </div>
+          <div class="wcard" id="wc2">
+            <div class="wq">y = −2x − 2 — what is the y-intercept? (enter the y-value)</div>
+            <div class="wrow"><input type="number" id="w2" placeholder="b = ?" /><button class="wbtn" onclick="chk(2,-2,'w2','fb2','wc2')">Check</button></div>
+            <div class="wfb" id="fb2"></div>
+          </div>
+          <div class="wcard" id="wc3">
+            <div class="wq">Line through (0,1) and (1,4) — what is rise/run?</div>
+            <div class="wrow"><input type="number" id="w3" placeholder="slope?" /><button class="wbtn" onclick="chk(3,3,'w3','fb3','wc3')">Check</button></div>
+            <div class="wfb" id="fb3"></div>
+          </div>
+        </div>
+        <div class="wu-note"><strong>Pattern:</strong> slope is always the number multiplied by x. y-intercept is always the constant added at the end.</div>
+      </div>
+    </div>
+
+    <div class="try-panel">
+      <div class="try-title">Graph any line — y = mx + b</div>
+      <div class="try-sub">Enter slope m and y-intercept b to see the line drawn.</div>
+      <div class="try-controls">
+        <span style="font-size:13px;color:var(--muted)">m =</span>
+        <input type="number" id="slope-in" value="3" step="0.5" style="width:70px" />
+        <span style="font-size:13px;color:var(--muted)">b =</span>
+        <input type="number" id="intercept-in" value="-2" step="1" style="width:70px" />
+        <button class="try-btn" onclick="drawCustom()">Draw</button>
+      </div>
+      <div style="display:flex;justify-content:center;margin-top:12px">
+        <canvas id="graph-custom" width="340" height="300"></canvas>
+      </div>
+      <div class="try-out" id="try-out-a"></div>
+    </div>
+
   </div>
 
-  <!-- WARMUP -->
-  <div class="section">
-    <div class="sec-header">
-      <div class="sec-chip green">02 &nbsp; Warmup</div>
-      <span class="sec-sub">reading slope-intercept form</span>
+  <!-- ═══════════════ TAB B — Distance Formula ═══════════════ -->
+  <div class="tab-pane" id="tab-b">
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip blue">What is the distance formula?</div></div>
+      <div class="card">
+        <p class="explain-text">
+          The distance between two points is the length of the straight line connecting them. It comes from the <strong>Pythagorean theorem</strong>: the horizontal and vertical gaps form the two legs of a right triangle, and the distance is the hypotenuse.
+        </p>
+        <div class="formula-box">
+          <div class="fl">Distance Formula</div>
+          <div class="fv">d = √[ (x₂ − x₁)² + (y₂ − y₁)² ]</div>
+        </div>
+        <div class="dist-canvas-wrap">
+          <canvas id="dist-diagram" width="300" height="220"></canvas>
+        </div>
+        <p class="explain-text" style="margin-top:8px">
+          <span class="hl">Exam trick:</span> Always subtract in the same order — (x₂−x₁) and (y₂−y₁). It doesn't matter which point is "1" because you're squaring both anyway. Squaring removes the negative.
+        </p>
+      </div>
     </div>
-    <div class="warmup-wrap">
-      <div class="wu-title">Read slope and intercept directly from f(x) = 3x − 2</div>
-      <div class="wu-grid">
-        <div class="wcard" id="wc1">
-          <div class="wq">In y = mx + b, what is m (slope) for f(x) = 3x − 2?</div>
-          <div class="wrow"><input type="number" id="w1" placeholder="m = ?" /><button class="wbtn" onclick="chk(1,3,'w1','fb1','wc1')">Check</button></div>
-          <div class="wfb" id="fb1"></div>
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip amber">Cheat sheet — Distance + Rounding</div></div>
+      <div class="cheat">
+        <div class="cheat-top"><div class="cheat-badge">Distance Formula</div><div class="cheat-headline">— 3 steps + rounding</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Subtract the x-coordinates: <code>(x₂ − x₁)</code>. Square the result.</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext">Subtract the y-coordinates: <code>(y₂ − y₁)</code>. Square the result.</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Add both squares. Take the square root. <strong>Simplify the radical if possible.</strong></div></div>
+        <div class="cheat-row"><div class="cbadge">Round</div><div class="ctext">Three decimal places = look at the 4th decimal. If ≥ 5, round up. If &lt; 5, leave alone.</div></div>
+        <div class="cheat-callout">Simplify √136: factor out perfect squares. 136 = 4 × 34 → √136 = √4 · √34 = 2√34. Always simplify before approximating.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip teal">Solve it — (−7,−9) to (3,−15)</div></div>
+      <div class="solve-card">
+        <div class="step">
+          <div class="snum blue">1</div>
+          <div><div class="stitle">Label the points</div>
+            <div class="math">(x₁, y₁) = (−7, −9) &nbsp;|&nbsp; (x₂, y₂) = (3, −15)</div>
+          </div>
         </div>
-        <div class="wcard" id="wc2">
-          <div class="wq">What is b (y-intercept value) for f(x) = 3x − 2?</div>
-          <div class="wrow"><input type="number" id="w2" placeholder="b = ?" /><button class="wbtn" onclick="chk(2,-2,'w2','fb2','wc2')">Check</button></div>
-          <div class="wfb" id="fb2"></div>
+        <div class="step">
+          <div class="snum blue">2</div>
+          <div><div class="stitle">Subtract x-coordinates, then square</div>
+            <div class="math">x₂ − x₁ = 3 − (−7) = 3 + 7 = 10</div>
+            <div class="math">(10)² = 100</div>
+          </div>
         </div>
-        <div class="wcard" id="wc3">
-          <div class="wq">Using slope 3 = 3/1, from (0,−2) go up 3, right 1. What is the y-value at x = 1?</div>
-          <div class="wrow"><input type="number" id="w3" placeholder="y = ?" /><button class="wbtn" onclick="chk(3,1,'w3','fb3','wc3')">Check</button></div>
-          <div class="wfb" id="fb3"></div>
+        <div class="step">
+          <div class="snum blue">3</div>
+          <div><div class="stitle">Subtract y-coordinates, then square</div>
+            <div class="math">y₂ − y₁ = −15 − (−9) = −15 + 9 = −6</div>
+            <div class="math">(−6)² = 36</div>
+            <div class="sdesc" style="margin-top:4px">Negative squared becomes positive. Good.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">4</div>
+          <div><div class="stitle">Add and take square root</div>
+            <div class="math">d = √(100 + 36) = √136</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">5</div>
+          <div><div class="stitle">Simplify the radical</div>
+            <div class="sdesc">Factor 136 to find perfect square factors: 136 = 4 × 34</div>
+            <div class="math">√136 = √(4 × 34) = √4 · √34 = 2√34</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum teal">6</div>
+          <div><div class="stitle">Round to three decimal places</div>
+            <div class="round-steps">
+              <div class="round-step"><strong>Calculator:</strong> <span class="rs-num">√34 ≈ 5.83095189...</span></div>
+              <div class="round-step"><strong>Multiply by 2:</strong> <span class="rs-num">2 × 5.83095... = 11.66190...</span></div>
+              <div class="round-step"><strong>Look at 4th decimal:</strong> <span class="rs-num">11.6619... → 4th digit = 9 ≥ 5 → round up 3rd decimal</span></div>
+              <div class="round-step"><strong>Result:</strong> <span class="rs-num">11.662</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="ans-label">Final Answer</div>
+          <div class="ans-val">Exact: 2√34 &nbsp;|&nbsp; Approximate: 11.662</div>
+        </div>
+        <div class="alert-box amber">
+          <div class="alert-title">Rounding rule — never forget</div>
+          <div class="alert-text">
+            Three decimal places = keep 3 digits after the decimal.<br>
+            Look at the <strong>4th digit</strong>: if it's 5, 6, 7, 8, or 9 → the 3rd digit goes up by 1.<br>
+            If it's 0, 1, 2, 3, or 4 → leave the 3rd digit as is.
+          </div>
         </div>
       </div>
-      <div class="wu-note"><strong>Those three pieces are all you need to graph:</strong> y-intercept, slope, second point. Plot two points, draw the line.</div>
     </div>
+
+    <div class="try-panel">
+      <div class="try-title">Distance calculator</div>
+      <div class="try-sub">Enter two points. See exact + approximate distance.</div>
+      <div class="try-controls" style="flex-wrap:wrap;gap:10px">
+        <span style="font-size:13px;color:var(--muted)">(x₁,y₁)</span>
+        <input type="number" id="x1" value="-7" style="width:60px" />
+        <input type="number" id="y1" value="-9" style="width:60px" />
+        <span style="font-size:13px;color:var(--muted)">(x₂,y₂)</span>
+        <input type="number" id="x2" value="3" style="width:60px" />
+        <input type="number" id="y2" value="-15" style="width:60px" />
+        <button class="try-btn" onclick="calcDist()">Calculate</button>
+      </div>
+      <div class="try-out" id="try-out-b"></div>
+    </div>
+
   </div>
 
-  <!-- SOLVE -->
-  <div class="section">
-    <div class="sec-header">
-      <div class="sec-chip teal">04 &nbsp; Solve it</div>
-      <span class="sec-sub">reading the equation and graphing</span>
+  <!-- ═══════════════ TAB C — Parallel & Perpendicular ═══════════════ -->
+  <div class="tab-pane" id="tab-c">
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip blue">Parallel vs Perpendicular</div></div>
+      <div class="card">
+        <p class="explain-text">
+          All line relationship questions come down to <strong>slope</strong>. Two key rules:
+        </p>
+        <div class="cond-row">
+          <div class="cond-pill par">Parallel: same slope &nbsp;m₁ = m₂</div>
+          <div class="cond-pill perp">Perpendicular: slopes are negative reciprocals &nbsp;m₁ × m₂ = −1</div>
+        </div>
+        <div class="alert-box teal" style="margin-top:12px">
+          <div class="alert-title">Negative reciprocal — how to find it</div>
+          <div class="alert-text">
+            Flip the fraction AND change the sign.<br>
+            m = 3/4 → perpendicular slope = −4/3<br>
+            m = −3 = −3/1 → perpendicular slope = 1/3<br>
+            m = 2/5 → perpendicular slope = −5/2
+          </div>
+        </div>
+        <p class="explain-text" style="margin-top:12px">
+          To write the equation of a line through a <strong>given point</strong>, use <strong>point-slope form</strong>:<br>
+          <span class="hl">y − y₁ = m(x − x₁)</span> &nbsp; then rearrange to y = mx + b.
+        </p>
+      </div>
     </div>
-    <div class="solve-card">
 
-      <div class="step">
-        <div class="snum blue">1</div>
-        <div>
-          <div class="stitle">Identify slope-intercept form</div>
-          <div class="sdesc">f(x) = 3x − 2 is already in y = mx + b form:</div>
-          <div class="math">y = 3x + (−2) &nbsp; → &nbsp; m = 3, &nbsp; b = −2</div>
-        </div>
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip amber">Cheat sheet</div></div>
+      <div class="cheat">
+        <div class="cheat-top"><div class="cheat-badge">Parallel &amp; Perpendicular Lines</div><div class="cheat-headline">— always same 4 steps</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Rewrite the given line in slope-intercept form <code>y = mx + b</code>. Read off the slope m.</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Parallel:</strong> use same slope. &nbsp;<strong>Perpendicular:</strong> use <code>−1/m</code> (flip and negate).</div></div>
+        <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Use point-slope form with the given point: <code>y − y₁ = m(x − x₁)</code></div></div>
+        <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext">Solve for y to get <code>y = mx + b</code> form.</div></div>
+        <div class="cheat-callout">Check: parallel lines have same slope but different b. Perpendicular: multiply both slopes → should get −1.</div>
       </div>
-
-      <div class="step">
-        <div class="snum blue">2</div>
-        <div>
-          <div class="stitle">Read the slope</div>
-          <div class="math">m = 3 = 3/1 &nbsp; (rise 3, run 1)</div>
-          <div class="sdesc">For every 1 step right, y goes up by 3. Positive slope = line rises left to right.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="snum blue">3</div>
-        <div>
-          <div class="stitle">Read the y-intercept</div>
-          <div class="math">b = −2 &nbsp; → &nbsp; point: (0, −2)</div>
-          <div class="sdesc">The line crosses the y-axis at −2. This is your first plot point.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="snum teal">4</div>
-        <div>
-          <div class="stitle">Find a second point using slope</div>
-          <div class="sdesc">From (0, −2), go up 3, right 1:</div>
-          <div class="math teal">Second point: (0+1, −2+3) = (1, 1)</div>
-        </div>
-      </div>
-
-      <div class="answer">
-        <div class="ans-label">Final Answer</div>
-        <div class="ans-val">Slope = 3 &nbsp;|&nbsp; Y-intercept = (0, −2)</div>
-        <div class="ans-pills">
-          <div class="ans-pill">m = 3 (rises steeply)</div>
-          <div class="ans-pill">b = −2</div>
-          <div class="ans-pill">Points: (0,−2) and (1,1)</div>
-        </div>
-      </div>
-
     </div>
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip teal">Solve it — through (3,−2), given line 3x + 4y = 7</div></div>
+      <div class="solve-card">
+        <div class="part-bar"><div class="part-pill a">Both Parts</div><div class="part-name">Point (3, −2) · Given line: 3x + 4y = 7</div></div>
+
+        <div class="step">
+          <div class="snum blue">1</div>
+          <div><div class="stitle">Find slope of given line — convert to y = mx + b</div>
+            <div class="math">3x + 4y = 7</div>
+            <div class="math">4y = −3x + 7</div>
+            <div class="math">y = (−3/4)x + 7/4</div>
+            <div class="sdesc" style="margin-top:4px">Slope of given line: m = −3/4</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="part-bar"><div class="part-pill a">Part A</div><div class="part-name">Parallel line through (3, −2)</div></div>
+        <div class="step">
+          <div class="snum blue">2</div>
+          <div><div class="stitle">Parallel → same slope: m = −3/4</div>
+            <div class="sdesc">Plug into point-slope form with (x₁, y₁) = (3, −2).</div>
+            <div class="math">y − (−2) = (−3/4)(x − 3)</div>
+            <div class="math">y + 2 = (−3/4)x + 9/4</div>
+            <div class="math">y = (−3/4)x + 9/4 − 2</div>
+            <div class="math">y = (−3/4)x + 9/4 − 8/4</div>
+            <div class="math">y = (−3/4)x + 1/4</div>
+          </div>
+        </div>
+        <div class="answer" style="margin-bottom:16px">
+          <div class="ans-label">Part A — Parallel</div>
+          <div class="ans-val">y = −(3/4)x + 1/4</div>
+          <div class="ans-pills"><div class="ans-pill">Same slope −3/4</div><div class="ans-pill">Different intercept</div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="part-bar"><div class="part-pill b">Part B</div><div class="part-name">Perpendicular line through (3, −2)</div></div>
+        <div class="step">
+          <div class="snum teal">3</div>
+          <div><div class="stitle">Perpendicular → negative reciprocal: m = 4/3</div>
+            <div class="sdesc">Original slope was −3/4. Flip → −4/3. Negate → +4/3.</div>
+            <div class="math">y − (−2) = (4/3)(x − 3)</div>
+            <div class="math">y + 2 = (4/3)x − 4</div>
+            <div class="math">y = (4/3)x − 4 − 2</div>
+            <div class="math teal">y = (4/3)x − 6</div>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="ans-label">Part B — Perpendicular</div>
+          <div class="ans-val">y = (4/3)x − 6</div>
+          <div class="ans-pills"><div class="ans-pill">Slope 4/3</div><div class="ans-pill">(−3/4) × (4/3) = −1 ✓</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="try-panel">
+      <div class="try-title">Find parallel &amp; perpendicular slopes</div>
+      <div class="try-sub">Enter any slope m. See parallel and perpendicular slopes instantly.</div>
+      <div class="try-controls">
+        <span style="font-size:13px;color:var(--muted)">m =</span>
+        <input type="number" id="slope-c" value="-0.75" step="0.25" style="width:80px" />
+        <button class="try-btn" onclick="calcC()">Calculate</button>
+      </div>
+      <div class="try-out" id="try-out-c"></div>
+    </div>
+
   </div>
 
-  <!-- INTERACTIVE GRAPH -->
-  <div class="try-panel">
-    <div class="try-title">Interactive Graph — f(x) = 3x − 2</div>
-    <div class="try-sub">Type any x-value to see the point plotted. The graph shows the full line.</div>
-    <div class="try-controls">
-      <input type="number" id="xval" value="1" step="1" />
-      <button class="try-btn" onclick="calcLive()">Plot x =</button>
+  <!-- ═══════════════ TAB D — Equation from Graph ═══════════════ -->
+  <div class="tab-pane" id="tab-d">
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip blue">What is this asking?</div></div>
+      <div class="card">
+        <p class="explain-text">
+          Given a graph (or two points on a line), write the equation in <strong>slope-intercept form</strong>: y = mx + b.<br><br>
+          You need two things: the <strong>slope</strong> (how steep) and the <strong>y-intercept</strong> (where it crosses the y-axis).
+        </p>
+        <div class="formula-box">
+          <div class="fl">Slope from two points</div>
+          <div class="fv">m = (y₂ − y₁) / (x₂ − x₁)</div>
+        </div>
+        <p class="explain-text" style="margin-top:8px">
+          Once you have m, either read b from the graph (the point where x = 0) or use point-slope form to calculate it.
+        </p>
+      </div>
     </div>
-    <div class="try-out" id="try-out" style="margin-bottom:12px"></div>
-    <canvas id="graph" width="480" height="320"></canvas>
+
+    <div class="section">
+      <div class="sec-header"><div class="sec-chip teal">Solve it — points (0,−2) and (1,−4)</div></div>
+      <div class="solve-card">
+        <div class="step">
+          <div class="snum blue">1</div>
+          <div><div class="stitle">Calculate the slope</div>
+            <div class="math">m = (y₂ − y₁) / (x₂ − x₁)</div>
+            <div class="math">m = (−4 − (−2)) / (1 − 0)</div>
+            <div class="math">m = (−4 + 2) / 1 = −2/1 = −2</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">2</div>
+          <div><div class="stitle">Read the y-intercept</div>
+            <div class="sdesc">One of the given points is (0, −2). That's where x = 0, so b = −2 directly.</div>
+            <div class="math">b = −2 &nbsp; → y-intercept = (0, −2)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="snum blue">3</div>
+          <div><div class="stitle">Write the equation</div>
+            <div class="math">y = mx + b = −2x + (−2)</div>
+            <div class="math">y = −2x − 2</div>
+          </div>
+        </div>
+        <div class="answer">
+          <div class="ans-label">Final Answer</div>
+          <div class="ans-val">y = −2x − 2</div>
+          <div class="ans-pills"><div class="ans-pill">Slope = −2</div><div class="ans-pill">y-intercept = (0, −2)</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="try-panel">
+      <div class="try-title">Equation from two points</div>
+      <div class="try-sub">Enter any two points. Get slope, y-intercept, and equation.</div>
+      <div class="try-controls" style="flex-wrap:wrap;gap:10px">
+        <span style="font-size:13px;color:var(--muted)">(x₁,y₁)</span>
+        <input type="number" id="dx1" value="0"  style="width:60px" />
+        <input type="number" id="dy1" value="-2" style="width:60px" />
+        <span style="font-size:13px;color:var(--muted)">(x₂,y₂)</span>
+        <input type="number" id="dx2" value="1"  style="width:60px" />
+        <input type="number" id="dy2" value="-4" style="width:60px" />
+        <button class="try-btn" onclick="calcD()">Calculate</button>
+      </div>
+      <div class="try-out" id="try-out-d"></div>
+    </div>
+
   </div>
 
-</div>
+</div><!-- .main -->
 
 <div class="footer-nav">
-  <a href="q6.html" class="fn-link back">← Q6: Radical Equations</a>
-  <a href="q8.html" class="fn-link next">Next: Distance Formula →</a>
+  <a href="q4.html" class="fn-link back">← Q4: Solving Equations</a>
+  <a href="q7.html" class="fn-link next">Next: Q7A→</a>
 </div>
 
 <script>
+/* ── Tab switching ── */
+function switchTab(id) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+  if (id === 'b') { setTimeout(drawDistDiagram, 50); }
+}
+
+/* ── Warmup ── */
 let done = 0;
-let highlightX = 1;
-const hints = [
-  'Hint: y = mx + b — the number in front of x is the slope',
-  'Hint: b is the constant at the end. f(x) = 3x − 2 → b = ?',
-  'Hint: f(1) = 3(1) − 2 = ?'
-];
+const hints = ['Hint: y = mx + b — the number in front of x is the slope','Hint: b is the constant at the end — what is it in y = −2x − 2?','Hint: slope = rise/run = (4−1)/(1−0)'];
 function chk(q, correct, inp, fb, card) {
   const val = parseFloat(document.getElementById(inp).value);
   const f = document.getElementById(fb), c = document.getElementById(card);
   if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
   if (Math.abs(val - correct) < 0.01) {
     f.textContent = '✓ Correct!'; f.className = 'wfb ok';
-    c.classList.add('correct'); c.classList.remove('incorrect');
-    done++; updateProgress();
+    c.classList.add('correct'); done++; updateProgress();
   } else {
     f.textContent = hints[q-1]; f.className = 'wfb no';
     c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
@@ -266,83 +538,166 @@ function chk(q, correct, inp, fb, card) {
 }
 function updateProgress() {
   document.getElementById('prog-count').textContent = done + ' / 3 warmups';
-  ['p1','p2','p3','p4'].forEach((id, i) => {
+  ['p1','p2','p3'].forEach((id, i) => {
     const el = document.getElementById(id);
     if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
     else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
   });
 }
 
-function f(x) { return 3*x - 2; }
-
-function drawGraph() {
-  const canvas = document.getElementById('graph');
-  const ctx = canvas.getContext('2d');
-  const W = canvas.width, H = canvas.height;
-  const cx = W/2, cy = H/2;
-  const scale = 22;
-
-  ctx.clearRect(0,0,W,H);
-
-  // grid
+/* ── Graph helpers ── */
+function drawGrid(ctx, w, h, scale, ox, oy) {
   ctx.strokeStyle = '#e4e2d9'; ctx.lineWidth = 1;
-  for (let i = -10; i <= 10; i++) {
-    ctx.beginPath(); ctx.moveTo(cx+i*scale,0); ctx.lineTo(cx+i*scale,H); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(0,cy+i*scale); ctx.lineTo(W,cy+i*scale); ctx.stroke();
+  for (let x = 0; x <= w; x += scale) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
+  for (let y = 0; y <= h; y += scale) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
+  ctx.strokeStyle = '#6b6a64'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(ox,0); ctx.lineTo(ox,h); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0,oy); ctx.lineTo(w,oy); ctx.stroke();
+  // tick labels
+  ctx.fillStyle = '#6b6a64'; ctx.font = '10px DM Mono, monospace'; ctx.textAlign = 'center';
+  for (let i = -5; i <= 5; i++) {
+    if (i === 0) continue;
+    const px = ox + i*scale, py = oy + i*scale;
+    ctx.fillText(i, px, oy+12);
+    ctx.textAlign = 'right'; ctx.fillText(i, ox-4, py+4); ctx.textAlign = 'center';
   }
+}
+function toCanvas(x, y, ox, oy, scale) { return [ox + x*scale, oy - y*scale]; }
 
-  // axes
-  ctx.strokeStyle = '#6b6a64'; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
-
-  // axis labels
-  ctx.fillStyle = '#6b6a64'; ctx.font = '10px DM Sans, sans-serif'; ctx.textAlign='center';
-  for (let i = -10; i <= 10; i++) {
-    if (i !== 0) {
-      ctx.fillText(i, cx+i*scale, cy+14);
-      ctx.textAlign='right'; ctx.fillText(-i, cx-6, cy+i*scale+4); ctx.textAlign='center';
-    }
-  }
-
-  // line f(x) = 3x-2
+function drawLineOnCanvas(canvasId, m, b, pts, labels) {
+  const cv = document.getElementById(canvasId);
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  const scale = 28, ox = W/2, oy = H/2;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,W,H);
+  drawGrid(ctx, W, H, scale, ox, oy);
+  // line
+  const x0 = -ox/scale, x1 = ox/scale;
+  const [px0, py0] = toCanvas(x0, m*x0+b, ox, oy, scale);
+  const [px1, py1] = toCanvas(x1, m*x1+b, ox, oy, scale);
   ctx.strokeStyle = '#378ADD'; ctx.lineWidth = 2.5;
-  ctx.beginPath();
-  const x0 = -W/(2*scale) - 1, x1 = W/(2*scale) + 1;
-  ctx.moveTo(cx+x0*scale, cy-f(x0)*scale);
-  ctx.lineTo(cx+x1*scale, cy-f(x1)*scale);
-  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px0,py0); ctx.lineTo(px1,py1); ctx.stroke();
+  // points
+  const colors = ['#378ADD','#EF9F27','#1D9E75'];
+  pts.forEach((p,i) => {
+    const [cx,cy] = toCanvas(p[0],p[1],ox,oy,scale);
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.beginPath(); ctx.arc(cx,cy,5,0,Math.PI*2); ctx.fill();
+    if (labels && labels[i]) {
+      ctx.fillStyle = '#1a1a18'; ctx.font = '11px DM Sans, sans-serif';
+      ctx.fillText(labels[i], cx+8, cy-6);
+    }
+  });
+}
 
-  // y-intercept
-  ctx.fillStyle = '#378ADD';
-  ctx.beginPath(); ctx.arc(cx, cy-f(0)*scale, 5, 0, 2*Math.PI); ctx.fill();
-  ctx.fillStyle = '#185FA5'; ctx.font = '11px DM Mono, monospace'; ctx.textAlign='left';
-  ctx.fillText('(0,−2)', cx+7, cy-f(0)*scale-6);
+function drawDistDiagram() {
+  const cv = document.getElementById('dist-diagram');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const W = cv.width, H = cv.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#f7f6f2'; ctx.fillRect(0,0,W,H);
+  const A = [50, 170], B = [250, 50];
+  // right-angle guide lines
+  ctx.strokeStyle = '#e4e2d9'; ctx.lineWidth = 1.5; ctx.setLineDash([4,4]);
+  ctx.beginPath(); ctx.moveTo(B[0],A[1]); ctx.lineTo(A[0],A[1]); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(B[0],A[1]); ctx.lineTo(B[0],B[1]); ctx.stroke();
+  ctx.setLineDash([]);
+  // hypotenuse
+  ctx.strokeStyle = '#378ADD'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.moveTo(A[0],A[1]); ctx.lineTo(B[0],B[1]); ctx.stroke();
+  // points
+  [[A,'(x₁,y₁)'],[B,'(x₂,y₂)']].forEach(([pt,lbl]) => {
+    ctx.fillStyle = '#378ADD';
+    ctx.beginPath(); ctx.arc(pt[0],pt[1],5,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#1a1a18'; ctx.font = '12px DM Mono, monospace'; ctx.fillText(lbl, pt[0]+8, pt[1]-6);
+  });
+  // labels
+  ctx.fillStyle = '#6b6a64'; ctx.font = '11px DM Sans, sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('x₂ − x₁ (horizontal)', (A[0]+B[0])/2, A[1]+16);
+  ctx.save(); ctx.translate(B[0]+16, (A[1]+B[1])/2);
+  ctx.rotate(Math.PI/2); ctx.fillText('y₂ − y₁ (vertical)', 0, 0); ctx.restore();
+  ctx.fillStyle = '#378ADD'; ctx.font = 'bold 12px DM Mono, monospace';
+  ctx.fillText('d', (A[0]+B[0])/2 - 14, (A[1]+B[1])/2 - 6);
+  ctx.textAlign = 'left';
+}
 
-  // highlight point
-  const hx = highlightX, hy = f(hx);
-  if (isFinite(hy)) {
-    ctx.fillStyle = '#0F6E56';
-    ctx.beginPath(); ctx.arc(cx+hx*scale, cy-hy*scale, 6, 0, 2*Math.PI); ctx.fill();
-    ctx.fillStyle = '#085041'; ctx.textAlign = hx >= 0 ? 'left' : 'right';
-    ctx.fillText(`(${hx},${hy})`, cx+hx*scale + (hx>=0?8:-8), cy-hy*scale-8);
+/* ── Tab A calculator ── */
+function drawCustom() {
+  const m = parseFloat(document.getElementById('slope-in').value);
+  const b = parseFloat(document.getElementById('intercept-in').value);
+  const out = document.getElementById('try-out-a');
+  if (isNaN(m) || isNaN(b)) { out.innerHTML = '<div class="sdesc">Enter slope and intercept.</div>'; return; }
+  drawLineOnCanvas('graph-custom', m, b, [[0,b],[1,m+b]], [`(0,${b})`,`(1,${m+b})`]);
+  const slopeDir = m > 0 ? 'rises left→right' : m < 0 ? 'falls left→right' : 'horizontal';
+  out.innerHTML = `<div class="math">y = ${m}x + (${b}) &nbsp;|&nbsp; slope ${slopeDir}</div>
+    <div class="try-note">y-intercept (0, ${b}) · second point (1, ${m+b})</div>`;
+}
+
+/* ── Tab B ── */
+function gcd(a, b) { a = Math.abs(a); b = Math.abs(b); while(b) { let t=b; b=a%b; a=t; } return a; }
+function simplifyRadical(n) {
+  // find largest perfect square factor
+  for (let i = Math.floor(Math.sqrt(n)); i >= 2; i--) {
+    if (n % (i*i) === 0) return { coef: i, radicand: n/(i*i) };
   }
+  return { coef: 1, radicand: n };
 }
-
-function calcLive() {
-  const x = parseFloat(document.getElementById('xval').value);
-  const out = document.getElementById('try-out');
-  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
-  const y = f(x);
-  highlightX = x;
-  drawGraph();
+function calcDist() {
+  const x1=parseFloat(document.getElementById('x1').value), y1=parseFloat(document.getElementById('y1').value);
+  const x2=parseFloat(document.getElementById('x2').value), y2=parseFloat(document.getElementById('y2').value);
+  const out = document.getElementById('try-out-b');
+  if ([x1,y1,x2,y2].some(isNaN)) { out.innerHTML = '<div class="sdesc">Enter all four coordinates.</div>'; return; }
+  const dx = x2-x1, dy = y2-y1;
+  const sum = dx*dx + dy*dy;
+  const exact = Math.sqrt(sum);
+  const approx = exact.toFixed(3);
+  const s = simplifyRadical(sum);
+  const exactStr = s.coef === 1 ? `√${sum}` : s.radicand === 1 ? `${s.coef}` : `${s.coef}√${s.radicand}`;
   out.innerHTML = `
-    <div class="math">f(${x}) = 3(${x}) − 2 = ${3*x} − 2 = <strong>${y}</strong></div>
-    <div class="try-note">✓ Point (${x}, ${y}) is on the line.</div>`;
+    <div class="math">(Δx)² = (${dx})² = ${dx*dx}</div>
+    <div class="math">(Δy)² = (${dy})² = ${dy*dy}</div>
+    <div class="math">d = √(${dx*dx} + ${dy*dy}) = √${sum} = <strong>${exactStr}</strong></div>
+    <div class="math teal">Approximate: <strong>${approx}</strong></div>`;
 }
 
-drawGraph();
-calcLive();
+/* ── Tab C ── */
+function calcC() {
+  const m = parseFloat(document.getElementById('slope-c').value);
+  const out = document.getElementById('try-out-c');
+  if (isNaN(m) || m === 0) { out.innerHTML = '<div class="sdesc">Enter a non-zero slope.</div>'; return; }
+  const perp = -1/m;
+  out.innerHTML = `
+    <div class="math">Given slope: m = ${m}</div>
+    <div class="math">Parallel slope: <strong>${m}</strong> (same)</div>
+    <div class="math teal">Perpendicular slope: <strong>${perp.toFixed(4)}</strong> = −1/${m}</div>
+    <div class="try-note">Check: ${m} × ${perp.toFixed(4)} = ${(m*perp).toFixed(4)} ≈ −1 ✓</div>`;
+}
+
+/* ── Tab D ── */
+function calcD() {
+  const x1=parseFloat(document.getElementById('dx1').value), y1=parseFloat(document.getElementById('dy1').value);
+  const x2=parseFloat(document.getElementById('dx2').value), y2=parseFloat(document.getElementById('dy2').value);
+  const out = document.getElementById('try-out-d');
+  if ([x1,y1,x2,y2].some(isNaN)) { out.innerHTML = '<div class="sdesc">Enter all four coordinates.</div>'; return; }
+  if (x2 === x1) { out.innerHTML = '<div class="math" style="border-left-color:#E24B4A">Vertical line — undefined slope. Equation: x = '+x1+'</div>'; return; }
+  const m = (y2-y1)/(x2-x1);
+  const b = y1 - m*x1;
+  out.innerHTML = `
+    <div class="math">slope = (${y2}−${y1}) / (${x2}−${x1}) = ${y2-y1} / ${x2-x1} = <strong>${m.toFixed(4)}</strong></div>
+    <div class="math">b = y − mx = ${y1} − (${m.toFixed(4)})(${x1}) = <strong>${b.toFixed(4)}</strong></div>
+    <div class="math teal">y = <strong>${m.toFixed(3)}x + (${b.toFixed(3)})</strong></div>`;
+}
+
+/* ── Init ── */
+drawLineOnCanvas('graph-a', 3, -2, [[0,-2],[1,1]], ['(0,−2)','(1,1)']);
+drawCustom();
+calcDist();
+calcC();
+calcD();
+drawDistDiagram();
 </script>
 </body>
 </html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q7 — Slope & Linear Functions | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared.css" />
+  <style>
+    canvas { display:block; border-radius: var(--r); border: 1px solid var(--border); background: white; width:100%; max-width:480px; }
+    .slope-table { width:100%; border-collapse:collapse; font-size:13px; margin-top:8px; }
+    .slope-table th { background:var(--bg); padding:8px 12px; text-align:left; font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); border-bottom:1px solid var(--border); }
+    .slope-table td { padding:10px 12px; border-bottom:1px solid var(--border); line-height:1.5; }
+    .slope-table td:first-child { font-family:var(--mono); font-weight:500; color:var(--blue-800); }
+    .slope-table tr:last-child td { border-bottom:none; }
+    .slope-visual { display:flex; gap:12px; flex-wrap:wrap; margin:12px 0; }
+    .sv-card { flex:1; min-width:120px; border-radius:var(--r); padding:12px 14px; text-align:center; }
+    .sv-card .sv-num { font-size:28px; font-weight:500; font-family:var(--mono); margin-bottom:4px; }
+    .sv-card .sv-lbl { font-size:12px; }
+    .sv-card.pos { background:var(--teal-50); color:var(--teal-800); }
+    .sv-card.neg { background:var(--red-50); color:var(--red-800); }
+    .sv-card.zero { background:var(--blue-50); color:var(--blue-800); }
+    .sv-card.undef { background:var(--amber-50); color:var(--amber-800); }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q6.html" class="nav-btn">← Q6</a>
+    <a href="q8.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 7 of 12</div>
+    <h1>Slope, Y-Intercept &amp; Graphing</h1>
+    <div class="q-box">
+      <strong>Question:</strong> List the slope and y-intercept. Then graph.<br>
+      <div class="fn-pills" style="margin-top:10px">
+        <div class="fn-pill">f(x) = 3x − 2</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+
+<div class="main">
+
+  <!-- SECTION 1 — concept -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        Any straight line can be written as: &nbsp;<span class="hl">y = mx + b</span>
+      </p>
+
+      <div class="rule-grid" style="margin:14px 0">
+        <div class="rule-card note">
+          <div class="rt">m = slope</div>
+          How steep the line is. Rise ÷ Run. How much y changes per 1 step in x.
+        </div>
+        <div class="rule-card note">
+          <div class="rt">b = y-intercept</div>
+          Where the line crosses the y-axis. The value of y when x = 0.
+        </div>
+      </div>
+
+      <p class="explain-text" style="margin-bottom:12px"><strong>What slope means visually:</strong></p>
+      <div class="slope-visual">
+        <div class="sv-card pos"><div class="sv-num">↗</div><div class="sv-lbl">Positive slope<br>line goes up-right</div></div>
+        <div class="sv-card neg"><div class="sv-num">↘</div><div class="sv-lbl">Negative slope<br>line goes down-right</div></div>
+        <div class="sv-card zero"><div class="sv-num">→</div><div class="sv-lbl">Slope = 0<br>flat horizontal line</div></div>
+        <div class="sv-card undef"><div class="sv-num">↕</div><div class="sv-lbl">Undefined slope<br>vertical line</div></div>
+      </div>
+
+      <p class="explain-text" style="margin-top:12px">
+        <strong>Slope formula from two points (x₁,y₁) and (x₂,y₂):</strong>
+      </p>
+      <div class="math" style="font-size:15px; text-align:center; margin:8px 0;">
+        m = (y₂ − y₁) / (x₂ − x₁) &nbsp; = &nbsp; rise / run
+      </div>
+    </div>
+  </div>
+
+  <!-- FULL SLOPE CHEAT SHEET (referenced by Q8, Q9, Q10) -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">Lines Master Reference</div>
+      <span class="sec-sub">Q8, Q9, Q10 all use this — screenshot it</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">All Line Equations</div><div class="cheat-headline">— slope, forms, parallel, perpendicular</div></div>
+
+      <div class="cheat-row"><div class="cbadge">Slope</div><div class="ctext">m = (y₂ − y₁) / (x₂ − x₁). Rise over run. Subtract y's on top, subtract x's on bottom. <strong>Same order both times.</strong></div></div>
+
+      <div class="cheat-row"><div class="cbadge">Slope-Intercept</div><div class="ctext"><code>y = mx + b</code> — m is slope, b is y-intercept. Best for reading slope and graphing.</div></div>
+
+      <div class="cheat-row"><div class="cbadge">Point-Slope</div><div class="ctext"><code>y − y₁ = m(x − x₁)</code> — use when you know a point (x₁, y₁) and slope m. Best for building an equation from a point.</div></div>
+
+      <div class="cheat-row"><div class="cbadge">Standard Form</div><div class="ctext"><code>Ax + By = C</code> — no fractions, all integers. Convert from slope-intercept by multiplying through.</div></div>
+
+      <div class="cheat-row"><div class="cbadge">Parallel</div><div class="ctext">Same slope, different intercept. If original slope is m, parallel slope is also <code>m</code>.</div></div>
+
+      <div class="cheat-row"><div class="cbadge">Perpendicular</div><div class="ctext">Slope flips and changes sign: <code>−1/m</code> (negative reciprocal). If slope = 3, perpendicular slope = −1/3. If slope = −3/4, perpendicular slope = 4/3.</div></div>
+
+      <div class="cheat-callout">
+        <strong>How to graph:</strong> Plot the y-intercept (0, b). Then use slope = rise/run to find next point. Draw a line through both points.
+      </div>
+    </div>
+
+    <!-- Slope conditions table -->
+    <div class="card" style="margin-top:10px">
+      <p class="explain-text" style="margin-bottom:10px"><strong>Slope conditions — quick reference</strong></p>
+      <table class="slope-table">
+        <thead><tr><th>Condition</th><th>What it means</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>m₁ = m₂</td><td>Same slope → Parallel lines (never meet)</td><td>m = 3 and m = 3</td></tr>
+          <tr><td>m₁ × m₂ = −1</td><td>Perpendicular (slopes are negative reciprocals)</td><td>3 × (−1/3) = −1 ✓</td></tr>
+          <tr><td>m = 0</td><td>Horizontal line: y = b</td><td>y = 4</td></tr>
+          <tr><td>m = undefined</td><td>Vertical line: x = a (not a function)</td><td>x = 2</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- WARMUP -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">reading slope-intercept form</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Read slope and intercept directly from f(x) = 3x − 2</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">In y = mx + b, what is m (slope) for f(x) = 3x − 2?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="m = ?" /><button class="wbtn" onclick="chk(1,3,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">What is b (y-intercept value) for f(x) = 3x − 2?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="b = ?" /><button class="wbtn" onclick="chk(2,-2,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">Using slope 3 = 3/1, from (0,−2) go up 3, right 1. What is the y-value at x = 1?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="y = ?" /><button class="wbtn" onclick="chk(3,1,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Those three pieces are all you need to graph:</strong> y-intercept, slope, second point. Plot two points, draw the line.</div>
+    </div>
+  </div>
+
+  <!-- SOLVE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">reading the equation and graphing</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Identify slope-intercept form</div>
+          <div class="sdesc">f(x) = 3x − 2 is already in y = mx + b form:</div>
+          <div class="math">y = 3x + (−2) &nbsp; → &nbsp; m = 3, &nbsp; b = −2</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Read the slope</div>
+          <div class="math">m = 3 = 3/1 &nbsp; (rise 3, run 1)</div>
+          <div class="sdesc">For every 1 step right, y goes up by 3. Positive slope = line rises left to right.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Read the y-intercept</div>
+          <div class="math">b = −2 &nbsp; → &nbsp; point: (0, −2)</div>
+          <div class="sdesc">The line crosses the y-axis at −2. This is your first plot point.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">4</div>
+        <div>
+          <div class="stitle">Find a second point using slope</div>
+          <div class="sdesc">From (0, −2), go up 3, right 1:</div>
+          <div class="math teal">Second point: (0+1, −2+3) = (1, 1)</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">Slope = 3 &nbsp;|&nbsp; Y-intercept = (0, −2)</div>
+        <div class="ans-pills">
+          <div class="ans-pill">m = 3 (rises steeply)</div>
+          <div class="ans-pill">b = −2</div>
+          <div class="ans-pill">Points: (0,−2) and (1,1)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INTERACTIVE GRAPH -->
+  <div class="try-panel">
+    <div class="try-title">Interactive Graph — f(x) = 3x − 2</div>
+    <div class="try-sub">Type any x-value to see the point plotted. The graph shows the full line.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="1" step="1" />
+      <button class="try-btn" onclick="calcLive()">Plot x =</button>
+    </div>
+    <div class="try-out" id="try-out" style="margin-bottom:12px"></div>
+    <canvas id="graph" width="480" height="320"></canvas>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q6.html" class="fn-link back">← Q6: Radical Equations</a>
+  <a href="q8.html" class="fn-link next">Next: Distance Formula →</a>
+</div>
+
+<script>
+let done = 0;
+let highlightX = 1;
+const hints = [
+  'Hint: y = mx + b — the number in front of x is the slope',
+  'Hint: b is the constant at the end. f(x) = 3x − 2 → b = ?',
+  'Hint: f(1) = 3(1) − 2 = ?'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+
+function f(x) { return 3*x - 2; }
+
+function drawGraph() {
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const scale = 22;
+
+  ctx.clearRect(0,0,W,H);
+
+  // grid
+  ctx.strokeStyle = '#e4e2d9'; ctx.lineWidth = 1;
+  for (let i = -10; i <= 10; i++) {
+    ctx.beginPath(); ctx.moveTo(cx+i*scale,0); ctx.lineTo(cx+i*scale,H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0,cy+i*scale); ctx.lineTo(W,cy+i*scale); ctx.stroke();
+  }
+
+  // axes
+  ctx.strokeStyle = '#6b6a64'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0,cy); ctx.lineTo(W,cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx,0); ctx.lineTo(cx,H); ctx.stroke();
+
+  // axis labels
+  ctx.fillStyle = '#6b6a64'; ctx.font = '10px DM Sans, sans-serif'; ctx.textAlign='center';
+  for (let i = -10; i <= 10; i++) {
+    if (i !== 0) {
+      ctx.fillText(i, cx+i*scale, cy+14);
+      ctx.textAlign='right'; ctx.fillText(-i, cx-6, cy+i*scale+4); ctx.textAlign='center';
+    }
+  }
+
+  // line f(x) = 3x-2
+  ctx.strokeStyle = '#378ADD'; ctx.lineWidth = 2.5;
+  ctx.beginPath();
+  const x0 = -W/(2*scale) - 1, x1 = W/(2*scale) + 1;
+  ctx.moveTo(cx+x0*scale, cy-f(x0)*scale);
+  ctx.lineTo(cx+x1*scale, cy-f(x1)*scale);
+  ctx.stroke();
+
+  // y-intercept
+  ctx.fillStyle = '#378ADD';
+  ctx.beginPath(); ctx.arc(cx, cy-f(0)*scale, 5, 0, 2*Math.PI); ctx.fill();
+  ctx.fillStyle = '#185FA5'; ctx.font = '11px DM Mono, monospace'; ctx.textAlign='left';
+  ctx.fillText('(0,−2)', cx+7, cy-f(0)*scale-6);
+
+  // highlight point
+  const hx = highlightX, hy = f(hx);
+  if (isFinite(hy)) {
+    ctx.fillStyle = '#0F6E56';
+    ctx.beginPath(); ctx.arc(cx+hx*scale, cy-hy*scale, 6, 0, 2*Math.PI); ctx.fill();
+    ctx.fillStyle = '#085041'; ctx.textAlign = hx >= 0 ? 'left' : 'right';
+    ctx.fillText(`(${hx},${hy})`, cx+hx*scale + (hx>=0?8:-8), cy-hy*scale-8);
+  }
+}
+
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
+  const y = f(x);
+  highlightX = x;
+  drawGraph();
+  out.innerHTML = `
+    <div class="math">f(${x}) = 3(${x}) − 2 = ${3*x} − 2 = <strong>${y}</strong></div>
+    <div class="try-note">✓ Point (${x}, ${y}) is on the line.</div>`;
+}
+
+drawGraph();
+calcLive();
+</script>
+</body>
+</html>
