@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q11 — Solving Log Equations · Math 152</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Question 11 — Solving Logarithmic Equations</div>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-btn">← All Questions</a>
+    <a href="q12.html" class="nav-btn primary">Next: Q12 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 11 of 12</div>
+    <h1>Solving Logarithmic Equations</h1>
+    <div class="q-box">
+      <strong>Part A:</strong> Solve &nbsp;<strong>log x + log(x + 3) = 1</strong><br>
+      <strong>Part B:</strong> Solve for t: &nbsp;<strong>e<sup>−0.94t</sup> = 0.01</strong>
+    </div>
+    <div class="fn-pills">
+      <div class="fn-pill">log(A·B) = log A + log B</div>
+      <div class="fn-pill">ln(eˣ) = x</div>
+      <div class="fn-pill">base 10 default</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step active"></div>
+    <div class="prog-step"></div>
+  </div>
+  <span class="prog-count">11 / 12</span>
+</div>
+
+<div class="main">
+
+  <!-- ── SECTION 1: PLAIN ENGLISH ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip blue">① Plain English</div>
+      <span class="sec-sub">what is this question actually asking?</span>
+    </div>
+    <div class="card">
+      <p class="explain-text">
+        A <strong>logarithmic equation</strong> has a log (or ln) with an unknown variable inside it. Your goal
+        is to get rid of the log so you can solve for x (or t) like normal.
+      </p>
+      <br>
+      <p class="explain-text">
+        <strong>Part A</strong> — You have two logs being <em>added</em> on the left side. The product rule
+        lets you smash them into one single log. Once you have one log equal to a number, you can rewrite
+        it in exponential form and solve the resulting quadratic.
+      </p>
+      <br>
+      <p class="explain-text">
+        <strong>Part B</strong> — The variable t is stuck in the exponent of e. The reverse of eˣ is
+        <strong>ln</strong> (natural log). Take ln of both sides to bring t down, then divide.
+        Always round to <span class="hl">3 decimal places</span> unless told otherwise.
+      </p>
+      <br>
+      <p class="explain-text">
+        <strong>Key difference:</strong> log means base 10 &nbsp;·&nbsp; ln means base e ≈ 2.718.
+        When no base is written, assume base 10.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: WARMUP ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">② Warmup</div>
+      <span class="sec-sub">3 quick checks before the full solution</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Answer each mini-question, then press Check</div>
+      <div class="wu-grid">
+
+        <!-- W1 -->
+        <div class="wcard" id="wc1">
+          <div class="wq">Apply the product rule:<br>log 3 + log 4 = log(?)</div>
+          <div class="wrow">
+            <input id="w1" type="number" placeholder="?" />
+            <button class="wbtn" onclick="checkW(1,'12','log 3 + log 4 = log(3·4) = log 12')">Check</button>
+          </div>
+          <div class="wfb" id="wf1"></div>
+        </div>
+
+        <!-- W2 -->
+        <div class="wcard" id="wc2">
+          <div class="wq">Rewrite in exponential form:<br>log₁₀(X) = 1 → X = ?</div>
+          <div class="wrow">
+            <input id="w2" type="number" placeholder="X" />
+            <button class="wbtn" onclick="checkW(2,'10','log₁₀(X)=1 means 10¹ = X, so X = 10')">Check</button>
+          </div>
+          <div class="wfb" id="wf2"></div>
+        </div>
+
+        <!-- W3 -->
+        <div class="wcard" id="wc3">
+          <div class="wq">Simplify ln(e^(−2)) = ?</div>
+          <div class="wrow">
+            <input id="w3" type="number" placeholder="?" />
+            <button class="wbtn" onclick="checkW(3,'-2','ln(eˣ) = x, so ln(e^(−2)) = −2')">Check</button>
+          </div>
+          <div class="wfb" id="wf3"></div>
+        </div>
+
+      </div>
+      <div class="wu-note" id="wu-note" style="display:none">
+        <strong>Nice work!</strong> You've got the building blocks: product rule combines logs,
+        exponential form removes log₁₀, and ln cancels e. Now for the full solution.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: CHEAT SHEET ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">③ Cheat Sheet</div>
+      <span class="sec-sub">screenshot before the exam</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top">
+        <div class="cheat-badge">log vs ln</div>
+        <div class="cheat-headline">— know the difference at a glance</div>
+      </div>
+
+      <!-- comparison table -->
+      <table class="dr-table" style="margin-bottom:14px;">
+        <thead>
+          <tr><th></th><th>log</th><th>ln</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="color:var(--amber-800);font-family:var(--sans);font-size:13px;">Stands for</td><td>Logarithm</td><td>Natural Logarithm</td></tr>
+          <tr><td style="color:var(--amber-800);font-family:var(--sans);font-size:13px;">Base</td><td>Base 10</td><td>Base e ≈ 2.718</td></tr>
+          <tr><td style="color:var(--amber-800);font-family:var(--sans);font-size:13px;">Form</td><td>log₁₀(x) or log(x)</td><td>ln(x) or logₑ(x)</td></tr>
+          <tr><td style="color:var(--amber-800);font-family:var(--sans);font-size:13px;">Inverse of</td><td>10ˣ</td><td>eˣ</td></tr>
+          <tr><td style="color:var(--amber-800);font-family:var(--sans);font-size:13px;">Special value</td><td>log(10) = 1</td><td>ln(e) = 1</td></tr>
+        </tbody>
+      </table>
+
+      <div class="cheat-row">
+        <div class="cbadge">Product</div>
+        <div class="ctext"><code>log(M·N) = log M + log N</code> &nbsp;·&nbsp; works for ln too</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">Quotient</div>
+        <div class="ctext"><code>log(M/N) = log M − log N</code></div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">Power</div>
+        <div class="ctext"><code>log(Mᵖ) = p · log M</code> — bring the exponent down front</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">Exp form</div>
+        <div class="ctext"><code>log_b(a) = c ⟺ b^c = a</code> — switch from log to exponential</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">ln cancel</div>
+        <div class="ctext"><code>ln(eˣ) = x</code> &nbsp;·&nbsp; <code>e^(ln x) = x</code></div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">1 = log 10</div>
+        <div class="ctext">Since log(10) = 1, you can rewrite 1 as log(10) to combine with other logs</div>
+      </div>
+
+      <div class="cheat-callout">
+        ⚠️ <strong>Domain check required!</strong> After solving, plug back in. If log(x) appears,
+        then x must be <strong>positive</strong>. Negative values inside a log are undefined — always reject them.
+      </div>
+
+      <!-- Rounding cheat -->
+      <div style="margin-top:14px; border-top:1px solid var(--amber-100); padding-top:12px;">
+        <div class="cheat-top" style="margin-bottom:10px;">
+          <div class="cheat-badge">Rounding</div>
+          <div class="cheat-headline">— 3 decimal places rule</div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Rule</div>
+          <div class="ctext">Look at the <strong>4th decimal digit</strong>. If it is 5 or above → round the 3rd digit up. If it is 4 or below → keep the 3rd digit as-is.</div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Example</div>
+          <div class="ctext"><code>4.89914…</code> → 4th digit is 1 (below 5) → round to <code>4.899</code></div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Example 2</div>
+          <div class="ctext"><code>3.14159…</code> → 4th digit is 5 → round up → <code>3.142</code></div>
+        </div>
+        <div class="cheat-callout">
+          On your calculator: compute the full decimal, then write only 3 digits after the decimal point, applying the rounding rule above.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: STEP-BY-STEP ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">④ Step-by-Step Solution</div>
+      <span class="sec-sub">full worked solution with live calculator</span>
+    </div>
+
+    <!-- PART A -->
+    <div class="solve-card">
+      <div class="part-bar">
+        <div class="part-pill a">Part A</div>
+        <div class="part-name">log x + log(x + 3) = 1</div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Identify the base</div>
+          <div class="sdesc">No base is written, so log means log base 10.</div>
+          <div class="math">log₁₀ x + log₁₀(x + 3) = 1</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Combine logs — Product Rule</div>
+          <div class="sdesc">log A + log B = log(A·B). Combine both logs on the left into one.</div>
+          <div class="math">log₁₀[x(x + 3)] = 1</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Rewrite in exponential form</div>
+          <div class="sdesc">log₁₀(X) = 1 means 10¹ = X. So:</div>
+          <div class="math">x(x + 3) = 10¹ = 10</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Expand and solve the quadratic</div>
+          <div class="sdesc">Distribute, move everything to one side, then factor.</div>
+          <div class="math">x² + 3x = 10</div>
+          <div class="math">x² + 3x − 10 = 0</div>
+          <div class="math">(x + 5)(x − 2) = 0</div>
+          <div class="math">x = −5 &nbsp;&nbsp;or&nbsp;&nbsp; x = 2</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">5</div>
+        <div>
+          <div class="stitle">Check for extraneous solutions</div>
+          <div class="sdesc">log(x) requires x &gt; 0. Check each candidate:</div>
+          <div class="mini-grid">
+            <div class="mini-item no">x = −5: log(−5) is undefined ✗</div>
+            <div class="mini-item ok">x = 2: log(2) + log(5) = log(10) = 1 ✓</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer — Part A</div>
+        <div class="ans-val">x = 2</div>
+        <div class="ans-pills">
+          <div class="ans-pill">x = −5 rejected (log of negative undefined)</div>
+          <div class="ans-pill">verified: log 2 + log 5 = log 10 = 1 ✓</div>
+        </div>
+      </div>
+
+      <div class="alert-box amber">
+        <div class="alert-title">Alternative Method — Rewrite 1 as log(10)</div>
+        <div class="alert-text">
+          Since log(10) = 1, rewrite the equation as:<br>
+          <strong>log x + log(x+3) = log(10)</strong><br>
+          Combine left side: log[x(x+3)] = log(10)<br>
+          Since log is one-to-one: x(x+3) = 10 → same quadratic → same answer.
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- PART B -->
+    <div class="solve-card">
+      <div class="part-bar">
+        <div class="part-pill b">Part B</div>
+        <div class="part-name">e<sup>−0.94t</sup> = 0.01 — solve for t</div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">1</div>
+        <div>
+          <div class="stitle">Take ln of both sides</div>
+          <div class="sdesc">The base is e, so use natural log (ln) to undo the exponential.</div>
+          <div class="math teal">ln(e^(−0.94t)) = ln(0.01)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">2</div>
+        <div>
+          <div class="stitle">Simplify the left side</div>
+          <div class="sdesc">Rule: ln(eˣ) = x. The ln and e cancel perfectly.</div>
+          <div class="math teal">−0.94t = ln(0.01)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">3</div>
+        <div>
+          <div class="stitle">Solve for t — divide both sides by −0.94</div>
+          <div class="math teal">t = ln(0.01) / (−0.94)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">4</div>
+        <div>
+          <div class="stitle">Simplify ln(0.01) — exact form</div>
+          <div class="sdesc">0.01 = 10⁻², so ln(0.01) = ln(10⁻²) = −2·ln(10)</div>
+          <div class="math teal">t = (−2 ln 10) / (−0.94) = (2 ln 10) / 0.94</div>
+          <div class="math amber">Exact: t = (100 ln 10) / 47</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Approximate to 3 decimal places</div>
+          <div class="sdesc">ln(10) ≈ 2.302585 → 2 × 2.302585 = 4.60517 → ÷ 0.94</div>
+          <div class="math teal">t ≈ 4.60517 / 0.94 ≈ 4.89912… → <strong>t ≈ 4.899</strong></div>
+          <div class="sdesc" style="margin-top:6px;">4th decimal is 1 (below 5) → 3rd decimal stays as 9 → <strong>4.899</strong></div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer — Part B</div>
+        <div class="ans-val">t = (2 ln 10) / 0.94 ≈ 4.899</div>
+        <div class="ans-pills">
+          <div class="ans-pill">exact: (100 ln 10) / 47</div>
+          <div class="ans-pill">rounded to 3 decimal places</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE CALCULATOR -->
+    <div class="try-panel">
+      <div class="try-title">Live Calculator</div>
+      <div class="try-sub">Part A: enter a value for x to verify log x + log(x+3). &nbsp; Part B: enter a value for t to verify e^(−0.94t).</div>
+
+      <div style="margin-bottom:16px;">
+        <div style="font-size:13px; font-weight:500; color:var(--text); margin-bottom:8px;">Part A — check log x + log(x+3)</div>
+        <div class="try-controls">
+          <input id="calxA" type="number" placeholder="x" step="any" value="2" />
+          <button class="try-btn" onclick="calcA()">Evaluate</button>
+        </div>
+        <div class="try-out" id="outA"></div>
+      </div>
+
+      <hr style="border:none; border-top:1px solid var(--border); margin: 12px 0;" />
+
+      <div>
+        <div style="font-size:13px; font-weight:500; color:var(--text); margin-bottom:8px;">Part B — check e^(−0.94t)</div>
+        <div class="try-controls">
+          <input id="calxB" type="number" placeholder="t" step="any" value="4.899" />
+          <button class="try-btn" onclick="calcB()">Evaluate</button>
+        </div>
+        <div class="try-out" id="outB"></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER NAV -->
+<div class="footer-nav">
+  <a href="q10.html" class="fn-link back">← Q10</a>
+  <a href="index.html" class="fn-link home">All Questions</a>
+  <a href="q12.html" class="fn-link next">Q12 →</a>
+</div>
+
+<script>
+  /* ── Warmup ── */
+  let passed = 0;
+  function checkW(n, ans, explanation) {
+    const val = document.getElementById('w'+n).value.trim();
+    const fb  = document.getElementById('wf'+n);
+    const card = document.getElementById('wc'+n);
+    if (val === ans) {
+      fb.textContent = '✓ Correct! ' + explanation;
+      fb.className = 'wfb ok';
+      card.classList.add('correct');
+      passed++;
+      if (passed >= 3) document.getElementById('wu-note').style.display = 'block';
+    } else {
+      fb.textContent = '✗ Try again — hint: ' + explanation;
+      fb.className = 'wfb no';
+      card.classList.remove('correct');
+      card.classList.add('incorrect');
+      setTimeout(() => card.classList.remove('incorrect'), 400);
+    }
+  }
+
+  /* ── Calculator A ── */
+  function calcA() {
+    const x = parseFloat(document.getElementById('calxA').value);
+    const out = document.getElementById('outA');
+    if (isNaN(x)) { out.innerHTML = '<div class="math">Enter a number for x</div>'; return; }
+    if (x <= 0 || (x + 3) <= 0) {
+      out.innerHTML = '<div class="math" style="border-left-color:var(--wrong)">x must be positive (log of non-positive is undefined)</div>'; return;
+    }
+    const lx  = Math.log10(x);
+    const lx3 = Math.log10(x + 3);
+    const sum  = lx + lx3;
+    const isOne = Math.abs(sum - 1) < 0.0001;
+    out.innerHTML = `
+      <div class="math">log(${x}) = ${lx.toFixed(6)}</div>
+      <div class="math">log(${x+3}) = ${lx3.toFixed(6)}</div>
+      <div class="math" style="border-left-color:${isOne?'var(--correct)':'var(--wrong)'}">log(${x}) + log(${x+3}) = <strong>${sum.toFixed(6)}</strong> ${isOne ? '✓ equals 1' : '✗ does not equal 1'}</div>
+    `;
+  }
+
+  /* ── Calculator B ── */
+  function calcB() {
+    const t = parseFloat(document.getElementById('calxB').value);
+    const out = document.getElementById('outB');
+    if (isNaN(t)) { out.innerHTML = '<div class="math">Enter a number for t</div>'; return; }
+    const result = Math.exp(-0.94 * t);
+    const isClose = Math.abs(result - 0.01) < 0.0005;
+    out.innerHTML = `
+      <div class="math">e^(−0.94 × ${t}) = <strong>${result.toFixed(6)}</strong></div>
+      <div class="math" style="border-left-color:${isClose?'var(--correct)':'var(--wrong)'}">
+        Target: 0.01 &nbsp; Result: ${result.toFixed(6)} &nbsp; ${isClose ? '✓ correct (within rounding)' : '✗ not quite'}
+      </div>
+    `;
+  }
+
+  // run default on load
+  window.onload = () => { calcA(); calcB(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q4 — Systems of Equations | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q3.html" class="nav-btn">← Q3</a>
+    <a href="q5.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 4 of 12</div>
+    <h1>Solving a System of Equations</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Solve using the substitution method.
+      <div class="fn-pills" style="margin-top:10px">
+        <div class="fn-pill">x − 2y = 8</div>
+        <div class="fn-pill">x = y + 5</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        A <strong>system of equations</strong> is just two equations at the same time. You need to find the <span class="hl">one point (x, y)</span> that makes BOTH equations true simultaneously.
+      </p>
+
+      <div class="alert-box teal" style="margin:14px 0">
+        <div class="alert-title">Three possible outcomes</div>
+        <div class="alert-text">
+          <strong>One solution:</strong> Two lines cross at exactly one point. You get a unique x and y.<br><br>
+          <strong>Infinitely many solutions:</strong> Same line — every point works. Algebra gives 0 = 0 (always true).<br><br>
+          <strong>No solution:</strong> Parallel lines — never cross. Algebra gives something like 0 = 5 (impossible).
+        </div>
+      </div>
+
+      <p class="explain-text">
+        <strong>Substitution method:</strong> One equation already tells you what x equals. Plug that into the other equation — you're left with only one variable. Solve it.
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 — WARMUP -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">substitution practice before the real thing</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Quick substitution checks</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">The second equation says x = y + 5. If y = 3, what is x?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="x = ?" /><button class="wbtn" onclick="chk(1,8,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">Substitute x = y + 5 into x − 2y = 8. You get: (y+5) − 2y = 8. Simplify: −y + ? = 8</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,5,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">From −y + 5 = 8, subtract 5: −y = 3. Solve: y = ?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="y = ?" /><button class="wbtn" onclick="chk(3,-3,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>You just solved it in the warmup!</strong> y = −3. Now plug that back to find x. The full solve shows every step clearly.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 — CHEAT SHEET -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — substitution method every time</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Substitution Method</div><div class="cheat-headline">— 5 steps, always the same</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Find the equation where one variable is <strong>already isolated</strong> (alone on one side). That's your substitution equation.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Substitute:</strong> replace that variable in the OTHER equation with the expression. Now you have only one variable.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext"><strong>Solve</strong> the single-variable equation. Combine like terms, isolate the variable.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext"><strong>Back-substitute:</strong> plug your answer into either original equation to find the second variable.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 5</div><div class="ctext"><strong>Verify:</strong> plug (x, y) into BOTH original equations. Both must be true.</div></div>
+      <div class="cheat-callout">
+        If you get <code>0 = 0</code> → infinitely many solutions (same line).<br>
+        If you get <code>0 = 5</code> (false) → no solution (parallel lines).
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 — SOLVE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet exactly</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Identify the substitution equation</div>
+          <div class="sdesc">Equation 2 already has x isolated:</div>
+          <div class="math">x = y + 5</div>
+          <div class="sdesc" style="margin-top:6px">We'll substitute this into Equation 1.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Substitute into Equation 1</div>
+          <div class="sdesc">Replace every x in Equation 1 with (y + 5):</div>
+          <div class="math">x − 2y = 8</div>
+          <div class="math">(y + 5) − 2y = 8</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Simplify and solve for y</div>
+          <div class="sdesc">Combine the y terms:</div>
+          <div class="math">y + 5 − 2y = 8</div>
+          <div class="math">−y + 5 = 8</div>
+          <div class="sdesc">Subtract 5 from both sides:</div>
+          <div class="math">−y = 3</div>
+          <div class="sdesc">Multiply both sides by −1:</div>
+          <div class="math">y = −3</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Back-substitute to find x</div>
+          <div class="sdesc">Use Equation 2 since x is already isolated there:</div>
+          <div class="math">x = y + 5 = (−3) + 5 = 2</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Verify in BOTH original equations</div>
+          <div class="sdesc"><strong>Check Equation 1:</strong> x − 2y = 8</div>
+          <div class="math teal">(2) − 2(−3) = 2 + 6 = 8 ✓</div>
+          <div class="sdesc" style="margin-top:8px"><strong>Check Equation 2:</strong> x = y + 5</div>
+          <div class="math teal">(2) = (−3) + 5 = 2 ✓</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">x = 2, &nbsp; y = −3 &nbsp; → &nbsp; Solution: (2, −3)</div>
+        <div class="ans-pills">
+          <div class="ans-pill">One unique solution</div>
+          <div class="ans-pill">The two lines cross at (2, −3)</div>
+          <div class="ans-pill">Verified in both equations ✓</div>
+        </div>
+      </div>
+
+      <div class="alert-box amber">
+        <div class="alert-title">What each outcome looks like in algebra</div>
+        <div class="alert-text">
+          <strong>One solution (this question):</strong> you get x = number, y = number.<br>
+          <strong>Infinitely many:</strong> in the middle of solving, you'd get something like 0 = 0 or 8 = 8. Stop — same line.<br>
+          <strong>No solution:</strong> you'd get something like 0 = 5 (impossible). Stop — parallel lines.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">Test any point (x, y)</div>
+    <div class="try-sub">Enter x and y — see if they satisfy both equations simultaneously.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="2" step="1" placeholder="x" style="width:80px" />
+      <input type="number" id="yval" value="-3" step="1" placeholder="y" style="width:80px" />
+      <button class="try-btn" onclick="calcLive()">Test it</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q3.html" class="fn-link back">← Q3: Inverse Functions</a>
+  <a href="q5.html" class="fn-link next">Next: Rational Equations →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = [
+  'Hint: x = y + 5. If y = 3, then x = 3 + 5 = ?',
+  'Hint: (y+5) − 2y = y − 2y + 5 = −y + ?',
+  'Hint: −y = 3 → multiply both sides by −1'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const y = parseFloat(document.getElementById('yval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x) || isNaN(y)) { out.innerHTML = '<div class="sdesc">Enter both x and y.</div>'; return; }
+  const eq1 = x - 2*y;
+  const eq2 = y + 5;
+  const ok1 = Math.abs(eq1 - 8) < 0.001;
+  const ok2 = Math.abs(eq2 - x) < 0.001;
+  out.innerHTML = `
+    <div class="math" style="border-left-color:${ok1?'#1D9E75':'#E24B4A'}">Eq 1: x − 2y = ${x} − 2(${y}) = ${x} − ${2*y} = <strong>${eq1}</strong> ${ok1 ? '= 8 ✓' : '≠ 8 ✗'}</div>
+    <div class="math" style="border-left-color:${ok2?'#1D9E75':'#E24B4A'}">Eq 2: x = y + 5 → right side = ${y} + 5 = <strong>${eq2}</strong>, left side = ${x} ${ok2 ? '✓' : '✗'}</div>
+    <div class="try-note" style="color:${ok1&&ok2?'var(--correct)':'#A32D2D'}">
+      ${ok1 && ok2 ? '✓ ('+x+', '+y+') satisfies both equations — this is the solution!' : '✗ This point does not satisfy both equations. The solution is (2, −3).'}
+    </div>`;
+}
+calcLive();
+</script>
+</body>
+</html>

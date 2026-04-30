@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math 152 Final Review — Prof. Caleb Hind</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    /* ── index-only overrides ── */
+    .home-hero {
+      padding: 2.5rem 2rem 2rem;
+      background: linear-gradient(135deg, var(--blue-50) 0%, var(--teal-50) 100%);
+      border-bottom: 1px solid var(--blue-100);
+    }
+    .home-hero-inner { max-width: 780px; margin: 0 auto; }
+    .home-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: white; color: var(--blue-800); font-size: 12px;
+      font-weight: 500; padding: 4px 12px; border-radius: 20px;
+      margin-bottom: 14px; border: 1px solid var(--blue-100);
+    }
+    .home-hero h1 { font-size: 28px; font-weight: 500; color: var(--blue-900); margin-bottom: 8px; }
+    .home-hero p  { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 560px; }
+
+    /* ── Domain/Range cheat sheet ── */
+    .cheat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .cg-card {
+      background: white;
+      border: 1px solid var(--amber-100);
+      border-radius: var(--r);
+      padding: 14px 16px;
+    }
+    .cg-type {
+      font-size: 11px; font-weight: 500; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--amber-600); margin-bottom: 8px;
+    }
+    .cg-fn {
+      font-family: var(--mono); font-size: 14px; font-weight: 500;
+      color: var(--text); margin-bottom: 6px;
+    }
+    .cg-rule {
+      font-size: 13px; color: var(--amber-800); line-height: 1.6;
+    }
+    .cg-rule code {
+      background: var(--amber-100); padding: 1px 6px; border-radius: 4px;
+      font-family: var(--mono); font-size: 12px; color: var(--amber-900);
+    }
+    .cg-domain {
+      margin-top: 8px; background: var(--amber-50);
+      border-radius: 6px; padding: 6px 10px;
+      font-family: var(--mono); font-size: 13px; color: var(--amber-900);
+      font-weight: 500;
+    }
+    .cg-card.restriction { border-color: var(--red-50); }
+    .cg-card.restriction .cg-type { color: var(--red-800); }
+    .cg-card.restriction .cg-rule { color: var(--red-800); }
+    .cg-card.restriction .cg-rule code { background: var(--red-50); color: var(--red-800); }
+    .cg-card.restriction .cg-domain { background: var(--red-50); color: var(--red-800); }
+
+    /* bracket explainer */
+    .bracket-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      margin-top: 10px;
+    }
+    .br-item {
+      border-radius: var(--r); padding: 10px 12px; text-align: center;
+    }
+    .br-item .br-sym { font-family: var(--mono); font-size: 22px; font-weight: 500; margin-bottom: 4px; }
+    .br-item .br-lbl { font-size: 12px; }
+    .br-item.paren  { background: var(--red-50);   color: var(--red-800); }
+    .br-item.square { background: var(--green-50); color: var(--green-800); }
+
+    /* ── Question list ── */
+    .q-list { display: flex; flex-direction: column; gap: 8px; }
+    .q-row {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--rl); padding: 14px 18px;
+      text-decoration: none; color: var(--text);
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .q-row:hover { border-color: var(--blue-400); box-shadow: 0 2px 8px rgba(55,138,221,0.1); }
+    .q-num {
+      min-width: 32px; height: 32px; border-radius: 50%;
+      background: var(--blue-50); color: var(--blue-800);
+      font-size: 13px; font-weight: 500;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-row-title { font-size: 14px; font-weight: 500; margin-bottom: 2px; }
+    .q-row-fn { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+    .q-row-arrow { margin-left: auto; color: var(--muted); font-size: 16px; }
+    .q-row.locked .q-num { background: var(--bg); color: var(--muted); }
+    .q-row.locked { opacity: 0.5; pointer-events: none; }
+    .coming-badge {
+      margin-left: auto; font-size: 11px; color: var(--muted);
+      background: var(--bg); border: 1px solid var(--border);
+      padding: 2px 8px; border-radius: 20px;
+    }
+
+    /* ── notation guide ── */
+    .notation-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 8px; margin-top: 10px;
+    }
+    .ng-item {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 10px 12px;
+    }
+    .ng-written { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .ng-proper  { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+    .ng-means   { font-size: 12px; color: var(--muted); }
+
+    /* section titles on index */
+    .idx-section { max-width: 780px; margin: 0 auto; padding: 0 2rem; margin-bottom: 2.5rem; }
+    .idx-head { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; margin-top: 2rem; }
+
+    @media(max-width:600px){
+      .home-hero { padding: 1.5rem 1rem; }
+      .idx-section { padding: 0 1rem; }
+      .cheat-grid { grid-template-columns: 1fr; }
+      .bracket-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q1.html" class="nav-btn primary">Start Q1 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="home-hero">
+  <div class="home-hero-inner">
+    <div class="home-badge"><div class="q-dot"></div> Math 152 · Wave 1 · 3 questions ready</div>
+    <h1>Final Exam Review</h1>
+    <p>12 questions. Each one has a plain-English explanation, warmup exercises, a cheat sheet you can screenshot, and a full step-by-step solution. Start anywhere.</p>
+  </div>
+</div>
+
+<!-- DOMAIN/RANGE CHEAT SHEET -->
+<div class="idx-section">
+  <div class="idx-head">
+    <div class="sec-chip amber">Domain &amp; Range — Master Cheat Sheet</div>
+    <span class="sec-sub">screenshot this page before the exam</span>
+  </div>
+
+  <div class="cheat" style="margin-bottom:12px">
+    <div class="cheat-top">
+      <div class="cheat-badge">Core Rules</div>
+      <div class="cheat-headline">— three things break a function</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cbadge">Rule 1</div>
+      <div class="ctext"><strong>Fraction:</strong> denominator <code>≠ 0</code>. Set bottom = 0, solve, exclude that value.</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cbadge">Rule 2</div>
+      <div class="ctext"><strong>Even root</strong> (√, ⁴√, …): inside <code>≥ 0</code>. Set inside ≥ 0, solve for x.</div>
+    </div>
+    <div class="cheat-row">
+      <div class="cbadge">Rule 3</div>
+      <div class="ctext"><strong>Odd root</strong> (∛, ⁵√, …): no restriction. Domain is all real numbers.</div>
+    </div>
+    <div class="cheat-callout">If a function has <em>two</em> restrictions (e.g. fraction AND square root), apply <strong>both</strong> rules together and find the intersection.</div>
+  </div>
+
+  <!-- bracket explainer -->
+  <div class="card" style="margin-bottom:12px">
+    <p class="explain-text" style="margin-bottom:10px"><strong>Interval notation — bracket rules</strong></p>
+    <div class="bracket-row">
+      <div class="br-item paren">
+        <div class="br-sym">( )</div>
+        <div class="br-lbl">Parenthesis — number is <strong>NOT</strong> included<br>Use for excluded values, ±∞ always</div>
+      </div>
+      <div class="br-item square">
+        <div class="br-sym">[ ]</div>
+        <div class="br-lbl">Square bracket — number <strong>IS</strong> included<br>Use when the endpoint satisfies the inequality</div>
+      </div>
+    </div>
+    <div style="margin-top:10px; font-size:13px; color:var(--muted); line-height:1.8;">
+      ∞ and −∞ <strong>always</strong> use ( ). &nbsp;|&nbsp;
+      ∪ means "or" — joins two pieces of the domain.
+    </div>
+  </div>
+
+  <!-- 7 function types -->
+  <div class="cheat-grid">
+
+    <div class="cg-card">
+      <div class="cg-type">① Polynomial</div>
+      <div class="cg-fn">f(x) = 2x³ − 5x + 1</div>
+      <div class="cg-rule">No fractions, no roots, no logs. <strong>No restrictions ever.</strong></div>
+      <div class="cg-domain">Domain: (−∞, ∞)</div>
+    </div>
+
+    <div class="cg-card">
+      <div class="cg-type">② Rational (fraction)</div>
+      <div class="cg-fn">f(x) = 1 / (x − 3)</div>
+      <div class="cg-rule">Bottom <code>≠ 0</code> → x − 3 ≠ 0 → <code>x ≠ 3</code></div>
+      <div class="cg-domain">Domain: (−∞, 3) ∪ (3, ∞)</div>
+    </div>
+
+    <div class="cg-card">
+      <div class="cg-type">③ Square root (even root)</div>
+      <div class="cg-fn">f(x) = √(x − 2)</div>
+      <div class="cg-rule">Inside <code>≥ 0</code> → x − 2 ≥ 0 → <code>x ≥ 2</code></div>
+      <div class="cg-domain">Domain: [2, ∞)</div>
+    </div>
+
+    <div class="cg-card">
+      <div class="cg-type">④ Cube root (odd root)</div>
+      <div class="cg-fn">f(x) = ∛x</div>
+      <div class="cg-rule">Odd roots accept <strong>all reals including negatives</strong>. No restriction.</div>
+      <div class="cg-domain">Domain: (−∞, ∞)</div>
+    </div>
+
+    <div class="cg-card restriction">
+      <div class="cg-type">⑤ Square root in denominator</div>
+      <div class="cg-fn">f(x) = 1 / √(x − 2)</div>
+      <div class="cg-rule">Inside <code>≥ 0</code> <em>and</em> bottom <code>≠ 0</code> → x − 2 > 0 → <code>x > 2</code><br>
+        (zero is excluded because √0 = 0 makes the fraction undefined)</div>
+      <div class="cg-domain">Domain: (2, ∞)  ← parenthesis, 2 excluded</div>
+    </div>
+
+    <div class="cg-card">
+      <div class="cg-type">⑥ Fraction — two excluded values</div>
+      <div class="cg-fn">f(x) = (x + 1) / (x² − 4)</div>
+      <div class="cg-rule">Bottom <code>≠ 0</code> → x² − 4 ≠ 0 → x² ≠ 4 → <code>x ≠ 2, x ≠ −2</code></div>
+      <div class="cg-domain">Domain: (−∞,−2) ∪ (−2, 2) ∪ (2, ∞)</div>
+    </div>
+
+    <div class="cg-card" style="grid-column: 1 / -1;">
+      <div class="cg-type">⑦ Combined restriction — root AND fraction</div>
+      <div class="cg-fn">f(x) = √(x + 3) / (x − 1)</div>
+      <div class="cg-rule">
+        Two rules apply at once:<br>
+        &nbsp;&nbsp;① Inside root ≥ 0 → x + 3 ≥ 0 → <code>x ≥ −3</code><br>
+        &nbsp;&nbsp;② Bottom ≠ 0 → x − 1 ≠ 0 → <code>x ≠ 1</code><br>
+        Combine: x ≥ −3 <em>and</em> x ≠ 1
+      </div>
+      <div class="cg-domain">Domain: [−3, 1) ∪ (1, ∞)</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- NOTATION GUIDE -->
+<div class="idx-section">
+  <div class="idx-head">
+    <div class="sec-chip blue">Math Notation Guide</div>
+    <span class="sec-sub">how to read and write it correctly</span>
+  </div>
+  <div class="notation-grid">
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">(x + 1) / (7 − x)</div>
+      <div class="ng-means">fraction: numerator over denominator</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">√(x − 2)</div>
+      <div class="ng-means">square root — even root, needs inside ≥ 0</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">∛(2x + 5)</div>
+      <div class="ng-means">cube root — odd root, all reals allowed</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">(1/2)x³</div>
+      <div class="ng-means">½ times x cubed — coefficient is a fraction</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">f⁻¹(x)</div>
+      <div class="ng-means">inverse function — NOT 1/f(x)</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">(f ∘ g)(x)</div>
+      <div class="ng-means">composition: f(g(x)) — g runs first</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">[−3/8, ∞)</div>
+      <div class="ng-means">includes −3/8, goes to positive infinity</div>
+    </div>
+    <div class="ng-item">
+      <div class="ng-written">Written as</div>
+      <div class="ng-proper">(−∞, 7) ∪ (7, ∞)</div>
+      <div class="ng-means">all reals except 7 — ∪ means "or"</div>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION LIST -->
+<div class="idx-section">
+  <div class="idx-head">
+    <div class="sec-chip teal">12 Questions — Wave 1</div>
+    <span class="sec-sub">3 ready now · more coming</span>
+  </div>
+  <div class="q-list">
+
+    <a href="q1.html" class="q-row">
+      <div class="q-num">1</div>
+      <div>
+        <div class="q-row-title">Domain of a Rational Function</div>
+        <div class="q-row-fn">f(x) = (x + 1) / (7 − x)</div>
+      </div>
+      <div class="q-row-arrow">→</div>
+    </a>
+
+    <a href="q2.html" class="q-row">
+      <div class="q-num">2</div>
+      <div>
+        <div class="q-row-title">Function Composition</div>
+        <div class="q-row-fn">(f ∘ g)(x) and (g ∘ f)(x) — f(x) = 8x + 3, g(x) = √x</div>
+      </div>
+      <div class="q-row-arrow">→</div>
+    </a>
+
+    <a href="q3.html" class="q-row">
+      <div class="q-num">3</div>
+      <div>
+        <div class="q-row-title">Inverse Functions</div>
+        <div class="q-row-fn">f(x) = (1/2)x³ − 5 &nbsp;→&nbsp; find f⁻¹(x), domain &amp; range</div>
+      </div>
+      <div class="q-row-arrow">→</div>
+    </a>
+
+    <div class="q-row locked">
+      <div class="q-num">4</div>
+      <div>
+        <div class="q-row-title">Coming soon</div>
+        <div class="q-row-fn">— paste the question to unlock</div>
+      </div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">5</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">6</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">7</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">8</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">9</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">10</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">11</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+    <div class="q-row locked">
+      <div class="q-num">12</div>
+      <div><div class="q-row-title">Coming soon</div></div>
+      <div class="coming-badge">soon</div>
+    </div>
+
+  </div>
+</div>
+
+<div style="max-width:780px; margin:0 auto; padding:0 2rem 3rem; text-align:center; font-size:13px; color:var(--muted);">
+  Math 152 · Final Exam Review · Prof. Caleb Hind
+</div>
+
+</body>
+</html>

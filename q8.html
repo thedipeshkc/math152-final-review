@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q8 — Distance Formula | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    canvas { display:block; border-radius:var(--r); border:1px solid var(--border); background:white; width:100%; max-width:480px; margin-top:12px; }
+    .round-demo { display:flex; flex-direction:column; gap:6px; margin:10px 0; }
+    .round-row { display:flex; gap:8px; align-items:center; font-family:var(--mono); font-size:13px; padding:8px 12px; background:var(--bg); border-radius:var(--r); border:1px solid var(--border); }
+    .round-arrow { color:var(--muted); }
+    .round-ok { color:var(--correct); font-weight:500; }
+    .round-bad { color:var(--red-800); text-decoration:line-through; }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q7.html" class="nav-btn">← Q7</a>
+    <a href="q9.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 8 of 12</div>
+    <h1>Distance Between Two Points</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Find the exact distance and approximate to three decimal places.
+      <div class="fn-pills" style="margin-top:10px">
+        <div class="fn-pill">(−7, −9)</div>
+        <div class="fn-pill">(3, −15)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        The <strong>distance formula</strong> tells you the straight-line distance between any two points on a graph.
+        It comes directly from the Pythagorean theorem: a² + b² = c².
+      </p>
+
+      <div class="alert-box teal" style="margin:14px 0">
+        <div class="alert-title">The formula</div>
+        <div class="alert-text" style="font-size:15px; font-family:'DM Mono',monospace; font-weight:500;">
+          d = √[ (x₂ − x₁)² + (y₂ − y₁)² ]
+        </div>
+      </div>
+
+      <p class="explain-text">
+        <strong>Why it works:</strong> The horizontal gap (x₂−x₁) and vertical gap (y₂−y₁) form the two legs of a right triangle. 
+        The distance is the hypotenuse — so you square both legs, add, then square root.
+      </p>
+
+      <div class="alert-box amber" style="margin-top:12px">
+        <div class="alert-title">⚡ Exam trick — negatives disappear when you square</div>
+        <div class="alert-text">
+          (x₂ − x₁) might be negative, but you square it — so it becomes positive anyway.
+          You never need to worry about the sign of the differences. Just subtract, then square.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUNDING GUIDE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">Rounding to 3 Decimal Places</div>
+      <span class="sec-sub">the exam asks for "nearest thousandth"</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Decimal Rounding</div><div class="cheat-headline">— thousandths = 3rd decimal place</div></div>
+      <div class="cheat-row"><div class="cbadge">Places</div><div class="ctext">Ones . Tenths Hundredths <strong>Thousandths</strong> Ten-thousandths…<br>Example: 11.6<strong>6</strong>18… — the 4th digit after the dot tells you whether to round up or keep.</div></div>
+      <div class="cheat-row"><div class="cbadge">Rule</div><div class="ctext">Look at the <strong>4th decimal digit</strong>. If it's 5 or more → round UP the 3rd digit. If it's 4 or less → keep the 3rd digit as-is (round down).</div></div>
+      <div class="cheat-callout">
+        Trick: cover everything after the 3rd decimal place. Look at the one digit you're about to cut. ≥ 5 → bump up. &lt; 5 → leave it.
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:10px">
+      <p class="explain-text" style="margin-bottom:10px"><strong>Examples:</strong></p>
+      <div class="round-demo">
+        <div class="round-row">11.661<strong>8</strong>… <span class="round-arrow">→</span> 4th digit is <strong>8</strong> (≥5) → round up 3rd digit <span class="round-ok">11.662 ✓</span></div>
+        <div class="round-row">3.141<strong>5</strong>… <span class="round-arrow">→</span> 4th digit is <strong>5</strong> (≥5) → round up <span class="round-ok">3.142 ✓</span></div>
+        <div class="round-row">2.449<strong>4</strong>… <span class="round-arrow">→</span> 4th digit is <strong>4</strong> (&lt;5) → keep <span class="round-ok">2.449 ✓</span></div>
+        <div class="round-row">7.998<strong>7</strong>… <span class="round-arrow">→</span> 4th digit is <strong>7</strong> (≥5) → round up → 7.999 <span class="round-ok">✓</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARMUP -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">arithmetic you need for the distance formula</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Compute the pieces of the formula</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">x₂ − x₁ = 3 − (−7) = ?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="?" /><button class="wbtn" onclick="chk(1,10,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">y₂ − y₁ = −15 − (−9) = ?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,-6,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">10² + (−6)² = 100 + ? = ?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="total?" /><button class="wbtn" onclick="chk(3,136,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>√136 is the exact distance (before simplifying).</strong> Let's simplify it in the solve section below.</div>
+    </div>
+  </div>
+
+  <!-- SOLVE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">exact answer first, then approximate</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="part-bar"><div class="part-pill a">Part A</div><div class="part-name">Exact distance</div></div>
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Label the points</div>
+          <div class="math">(x₁, y₁) = (−7, −9) &nbsp;&nbsp; (x₂, y₂) = (3, −15)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Find the differences</div>
+          <div class="math">x₂ − x₁ = 3 − (−7) = 3 + 7 = 10</div>
+          <div class="math">y₂ − y₁ = −15 − (−9) = −15 + 9 = −6</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Square both differences</div>
+          <div class="math">10² = 100</div>
+          <div class="math">(−6)² = 36 &nbsp; ← negative squared = positive</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Add and take square root</div>
+          <div class="math">d = √(100 + 36) = √136</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">5</div>
+        <div>
+          <div class="stitle">Simplify √136</div>
+          <div class="sdesc">Factor 136: 136 = 4 × 34. Since 4 is a perfect square:</div>
+          <div class="math">√136 = √(4 × 34) = √4 × √34 = 2√34</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Answer — Part A (Exact)</div>
+        <div class="ans-val">d = 2√34</div>
+        <div class="ans-pills">
+          <div class="ans-pill">√136 simplified</div>
+          <div class="ans-pill">Factor out perfect square 4</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="part-bar"><div class="part-pill b">Part B</div><div class="part-name">Approximate to 3 decimal places</div></div>
+
+      <div class="step">
+        <div class="snum teal">6</div>
+        <div>
+          <div class="stitle">Calculate 2√34 on a calculator</div>
+          <div class="math teal">√34 ≈ 5.8309518…</div>
+          <div class="math teal">2 × 5.8309518… = 11.6619038…</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">7</div>
+        <div>
+          <div class="stitle">Round to 3 decimal places</div>
+          <div class="sdesc">Look at the 4th decimal: 11.661<strong>9</strong>038 — 9 ≥ 5 → round up 3rd digit:</div>
+          <div class="math teal">11.6619… ≈ 11.662</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Answer — Part B (Approximate)</div>
+        <div class="ans-val">d ≈ 11.662</div>
+        <div class="ans-pills">
+          <div class="ans-pill">4th decimal was 9 → rounded up</div>
+          <div class="ans-pill">Nearest thousandth</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">Test any two points</div>
+    <div class="try-sub">Enter four values — x₁, y₁, x₂, y₂ — and see the distance calculated.</div>
+    <div class="try-controls" style="flex-wrap:wrap; gap:6px;">
+      <input type="number" id="x1" value="-7" step="1" style="width:70px" placeholder="x₁"/>
+      <input type="number" id="y1" value="-9" step="1" style="width:70px" placeholder="y₁"/>
+      <input type="number" id="x2" value="3" step="1" style="width:70px" placeholder="x₂"/>
+      <input type="number" id="y2" value="-15" step="1" style="width:70px" placeholder="y₂"/>
+      <button class="try-btn" onclick="calcLive()">Calculate</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+    <canvas id="graph" width="480" height="300"></canvas>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q7.html" class="fn-link back">← Q7: Slope & Graphing</a>
+  <a href="q9.html" class="fn-link next">Next: Parallel & Perpendicular →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = [
+  'Hint: subtracting a negative = adding. 3 − (−7) = 3 + 7 = ?',
+  'Hint: −15 − (−9) = −15 + 9 = ?',
+  'Hint: (−6)² = 36. 100 + 36 = ?'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+
+function drawGraph(x1,y1,x2,y2) {
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  const allX=[x1,x2], allY=[y1,y2];
+  const minX=Math.min(...allX)-3, maxX=Math.max(...allX)+3;
+  const minY=Math.min(...allY)-3, maxY=Math.max(...allY)+3;
+  const rangeX=maxX-minX, rangeY=maxY-minY;
+  const scaleX=(W-40)/rangeX, scaleY=(H-40)/rangeY;
+  const scale=Math.min(scaleX,scaleY);
+  const ox=20-minX*scale, oy=H-20+minY*scale;
+  function px(x){return ox+x*scale;}
+  function py(y){return oy-y*scale;}
+
+  ctx.clearRect(0,0,W,H);
+  // axes
+  ctx.strokeStyle='#e4e2d9'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(0,py(0)); ctx.lineTo(W,py(0)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px(0),0); ctx.lineTo(px(0),H); ctx.stroke();
+
+  // dashed right-triangle legs
+  ctx.setLineDash([5,4]); ctx.strokeStyle='#aaa'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(px(x1),py(y1)); ctx.lineTo(px(x2),py(y1)); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px(x2),py(y1)); ctx.lineTo(px(x2),py(y2)); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // distance line
+  ctx.strokeStyle='#378ADD'; ctx.lineWidth=2.5;
+  ctx.beginPath(); ctx.moveTo(px(x1),py(y1)); ctx.lineTo(px(x2),py(y2)); ctx.stroke();
+
+  // points
+  [[x1,y1,'#378ADD'],[x2,y2,'#0F6E56']].forEach(([x,y,color])=>{
+    ctx.fillStyle=color; ctx.beginPath(); ctx.arc(px(x),py(y),6,0,2*Math.PI); ctx.fill();
+    ctx.fillStyle=color; ctx.font='11px DM Mono,monospace'; ctx.textAlign='left';
+    ctx.fillText(`(${x},${y})`,px(x)+9,py(y)-6);
+  });
+}
+
+function calcLive() {
+  const x1=parseFloat(document.getElementById('x1').value);
+  const y1=parseFloat(document.getElementById('y1').value);
+  const x2=parseFloat(document.getElementById('x2').value);
+  const y2=parseFloat(document.getElementById('y2').value);
+  const out=document.getElementById('try-out');
+  if([x1,y1,x2,y2].some(isNaN)){out.innerHTML='<div class="sdesc">Fill in all four values.</div>';return;}
+  const dx=x2-x1, dy=y2-y1;
+  const d2=dx*dx+dy*dy;
+  const d=Math.sqrt(d2);
+  const rounded=d.toFixed(3);
+  out.innerHTML=`
+    <div class="math">Δx = ${x2} − (${x1}) = ${dx} &nbsp; → &nbsp; ${dx}² = ${dx*dx}</div>
+    <div class="math">Δy = ${y2} − (${y1}) = ${dy} &nbsp; → &nbsp; ${dy}² = ${dy*dy}</div>
+    <div class="math teal">d = √(${dx*dx} + ${dy*dy}) = √${d2} ≈ <strong>${rounded}</strong></div>
+    <div class="try-note">✓ Exact: √${d2} &nbsp;|&nbsp; Approximate: ${rounded}</div>`;
+  drawGraph(x1,y1,x2,y2);
+}
+calcLive();
+</script>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q2 — Composition | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q1.html" class="nav-btn">← Q1</a>
+    <a href="q3.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 2 of 12</div>
+    <h1>Function Composition</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Find (f ∘ g)(x) and (g ∘ f)(x) and the domain of each.
+      <div class="fn-pills">
+        <div class="fn-pill">f(x) = 8x + 3</div>
+        <div class="fn-pill">g(x) = √x</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">You have two functions. Think of them as <strong>two machines</strong> you chain together.</p>
+      <div class="machines">
+        <div class="machine">
+          <div class="machine-label">Machine f</div>
+          <div class="machine-fn">f(x) = 8x + 3</div>
+          <div class="machine-desc">multiply by 8, then add 3</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="machine">
+          <div class="machine-label">Machine g</div>
+          <div class="machine-fn">g(x) = √x</div>
+          <div class="machine-desc">take the square root</div>
+        </div>
+      </div>
+      <p class="explain-text">
+        <span class="hl">(f ∘ g)(x)</span> — run g first, feed that result into f.<br>
+        <span class="hl">(g ∘ f)(x)</span> — run f first, feed that result into g.<br><br>
+        <strong>Domain</strong> tells us: which x values are actually allowed? Some values will break the square root, so we need to check.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">same functions — just substitution practice</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Build confidence before the real thing</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">f(x) = 8x + 3. What is f(2)?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="?" /><button class="wbtn" onclick="chk(1,19,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">g(x) = √x. What is g(4)?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,2,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">f(x) = 8x + 3. What is f(√4)?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="?" /><button class="wbtn" onclick="chk(3,19,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>The aha moment:</strong> That last one — f(√4) — is exactly what (f ∘ g)(4) means. You just did composition without realizing it!</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — works every time</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Function Composition</div><div class="cheat-headline">— always the same 4 steps</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Write what it means: <code>(f ∘ g)(x) = f(g(x))</code> — right side goes inside left side.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext">Take the outer function. Replace every <code>x</code> in it with the entire inner function.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Simplify the result.</div></div>
+      <div class="cheat-row"><div class="cbadge">Domain</div><div class="ctext">Square roots need <code>inside ≥ 0</code>. Fractions need <code>bottom ≠ 0</code>. Use the strictest rule from both functions.</div></div>
+      <div class="cheat-callout">Order always matters — (f ∘ g) and (g ∘ f) give different answers. Always do them separately.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet</span>
+    </div>
+    <div class="solve-card">
+      <div class="part-bar"><div class="part-pill a">Part A</div><div class="part-name">Find (f ∘ g)(x)</div></div>
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div><div class="stitle">Write what it means</div><div class="sdesc">f goes outside, g goes inside.</div><div class="math">(f ∘ g)(x) = f( g(x) )</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div><div class="stitle">Replace every x in f with g(x) = √x</div><div class="sdesc">f(x) = 8x + 3. Every x becomes √x.</div><div class="math">f( √x ) = 8(√x) + 3</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div><div class="stitle">Simplify</div><div class="math">(f ∘ g)(x) = 8√x + 3</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div><div class="stitle">Find the domain</div><div class="sdesc">g(x) = √x requires x ≥ 0. f has no restriction. So domain comes from g.</div><div class="math">x ≥ 0</div></div>
+      </div>
+      <div class="answer">
+        <div class="ans-label">Answer — Part A</div>
+        <div class="ans-val">(f ∘ g)(x) = 8√x + 3</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Domain: x ≥ 0</div>
+          <div class="ans-pill">Interval: [0, ∞)</div>
+          <div class="ans-pill">[ because x = 0 IS included</div>
+        </div>
+      </div>
+      <div class="alert-box amber">
+        <div class="alert-title">Why is x = 0 included? A very common confusion.</div>
+        <div class="mini-grid">
+          <div class="mini-item ok">✓ √0 = 0 &nbsp; allowed</div>
+          <div class="mini-item ok">✓ √4 = 2 &nbsp; allowed</div>
+          <div class="mini-item no">✗ √(−1) &nbsp; NOT real</div>
+          <div class="mini-item no">✗ √(−9) &nbsp; NOT real</div>
+        </div>
+        <div class="alert-text">The rule is <strong>inside ≥ 0</strong>, not inside > 0. Zero is fine because √0 = 0. That's why we write <strong>[0, ∞)</strong> with a square bracket — bracket means the number is included.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="part-bar"><div class="part-pill b">Part B</div><div class="part-name">Find (g ∘ f)(x)</div></div>
+      <div class="step">
+        <div class="snum teal">1</div>
+        <div><div class="stitle">Write what it means — order flipped</div><div class="math">(g ∘ f)(x) = g( f(x) )</div></div>
+      </div>
+      <div class="step">
+        <div class="snum teal">2</div>
+        <div><div class="stitle">Replace every x in g with f(x) = 8x+3</div><div class="sdesc">g(x) = √x. Every x becomes (8x + 3).</div><div class="math">g( 8x+3 ) = √(8x + 3)</div></div>
+      </div>
+      <div class="step">
+        <div class="snum teal">3</div>
+        <div>
+          <div class="stitle">Find the domain</div>
+          <div class="sdesc">Inside of the square root must be ≥ 0. Solve:</div>
+          <div class="math teal">8x + 3 ≥ 0</div>
+          <div class="math teal">8x ≥ −3</div>
+          <div class="math teal">x ≥ −3/8</div>
+        </div>
+      </div>
+      <div class="answer">
+        <div class="ans-label">Answer — Part B</div>
+        <div class="ans-val">(g ∘ f)(x) = √(8x + 3)</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Domain: x ≥ −3/8</div>
+          <div class="ans-pill">Interval: [−3/8, ∞)</div>
+        </div>
+      </div>
+      <div class="alert-box teal">
+        <div class="alert-title">Key takeaway — the two answers are different</div>
+        <div class="alert-text">Part A gave 8√x + 3. Part B gave √(8x+3). Completely different functions, completely different domains. This always happens when you swap the order. That's why the question asks for both.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="try-panel">
+    <div class="try-title">Test it yourself</div>
+    <div class="try-sub">Type any x ≥ 0 and see both compositions calculated live.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="4" min="0" step="1" />
+      <button class="try-btn" onclick="calcLive()">Calculate</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+</div>
+
+<div class="footer-nav">
+  <a href="q1.html" class="fn-link back">← Q1: Domain</a>
+  <a href="q3.html" class="fn-link next">Next: Inverse Functions →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = ['Hint: 8 × 2 = 16, then + 3','Hint: what number × itself = 4?','Hint: √4 = 2, then f(2) = 8(2)+3'];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct! = ' + correct; f.className = 'wfb ok';
+    c.classList.add('correct'); done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x) || x < 0) { out.innerHTML = '<div class="sdesc" style="color:#A32D2D">Enter x ≥ 0 — square roots of negatives are not real.</div>'; return; }
+  const fog = (8*Math.sqrt(x)+3).toFixed(3).replace(/\.?0+$/,'');
+  const inside = +(8*x+3).toFixed(6);
+  const gof = Math.sqrt(inside).toFixed(3).replace(/\.?0+$/,'');
+  out.innerHTML = `
+    <div class="math">(f ∘ g)(${x}) = 8×√${x} + 3 = <strong>${fog}</strong></div>
+    <div class="math teal">(g ∘ f)(${x}) = √(8×${x}+3) = √${inside} = <strong>${gof}</strong></div>
+    <div class="try-note">Notice the two answers are different — order matters!</div>`;
+}
+calcLive();
+</script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q1 — Domain | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-btn">All Questions</a>
+    <a href="q2.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 1 of 12 — Start here. Easiest one.</div>
+    <h1>Finding the Domain of a Function</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Find the domain of the function &nbsp;&nbsp; f(x) = (x + 1) / (7 − x)
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text"><strong>Domain</strong> = all the numbers you are allowed to plug in as x.<br><br>Most of the time any number works. But three things <strong>break</strong> a function:</p>
+      <div class="rule-grid">
+        <div class="rule-card bad"><div class="rt">Divide by zero</div>Like 1/0 — undefined. Not allowed.</div>
+        <div class="rule-card bad"><div class="rt">Square root of negative</div>Like √(−4) — not a real number.</div>
+        <div class="rule-card bad"><div class="rt">Log of zero or negative</div>Like log(0) — undefined.</div>
+      </div>
+      <p class="explain-text" style="margin-top:12px">This question has a <strong>fraction</strong>. So the only rule we care about: <span class="hl">bottom of fraction ≠ 0</span></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">answer all 3 to build confidence</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Quick checks — same function as the real question</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">What value of x makes (7 − x) equal zero?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="x = ?" /><button class="wbtn" onclick="chk(1,7,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">Is dividing by zero allowed? (type 1=yes, 0=no)</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,0,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">So x must NOT equal what number?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="x ≠ ?" /><button class="wbtn" onclick="chk(3,7,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Notice:</strong> All three answers lead to the same thing — x = 7 is the only problem. Exclude it from the domain.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — works for ANY rational function</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Rational Function Domain</div><div class="cheat-headline">— works every time</div></div>
+      <div class="cheat-row"><div class="cbadge">Rule</div><div class="ctext">Rational function = any fraction. Only restriction: <code>denominator ≠ 0</code>.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Look at the <code>bottom only</code>. Ignore the top completely.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext">Set bottom <code>≠ 0</code> and solve for x. That value is excluded.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Write domain as: <code>(-∞, a) ∪ (a, ∞)</code> where a is the excluded value.</div></div>
+      <div class="cheat-row"><div class="cbadge">Brackets</div><div class="ctext"><code>( )</code> = number NOT included &nbsp;|&nbsp; <code>[ ]</code> = number IS included. Excluded values always use <code>( )</code>.</div></div>
+      <div class="cheat-callout">If bottom has x² → two excluded values. Exclude both. Domain splits into 3 pieces.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet</span>
+    </div>
+    <div class="solve-card">
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div><div class="stitle">Identify the type</div><div class="sdesc">f(x) = (x+1)/(7−x) is a fraction → rational function. Only rule: bottom ≠ 0.</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div><div class="stitle">Set denominator ≠ 0</div><div class="math">7 − x ≠ 0</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Solve for x</div>
+          <div class="math">−x ≠ −7</div>
+          <div class="math">x ≠ 7</div>
+          <div class="sdesc" style="margin-top:6px">x = 7 gives 8/0 — undefined. Every other number is fine.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div><div class="stitle">Write the domain</div><div class="sdesc">All real numbers except 7. Split at 7, use ( ) because 7 is excluded.</div></div>
+      </div>
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">Domain = (−∞, 7) ∪ (7, ∞)</div>
+        <div class="ans-pills">
+          <div class="ans-pill">All reals except x = 7</div>
+          <div class="ans-pill">( ) = 7 not included</div>
+          <div class="ans-pill">∪ = "or", joins the two halves</div>
+        </div>
+      </div>
+      <div class="alert-box amber">
+        <div class="alert-title">Quick verify — always do this</div>
+        <div class="alert-text">
+          Plug x = 7: (7+1)/(7−7) = 8/0 = undefined ✓ right to exclude.<br>
+          Plug x = 5: (5+1)/(7−5) = 6/2 = 3 ✓ works fine, so 5 is in the domain.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="try-panel">
+    <div class="try-title">Test any value of x</div>
+    <div class="try-sub">See instantly whether it's in the domain or not.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="5" step="1" />
+      <button class="try-btn" onclick="calcLive()">Test it</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+</div>
+
+<div class="footer-nav">
+  <a href="index.html" class="fn-link home">← All Questions</a>
+  <a href="q2.html" class="fn-link next">Next: Composition →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = ['Hint: 7 − x = 0 → x = ?','Hint: 1/0 is undefined — not allowed.','Hint: If 7−x ≠ 0, then x ≠ ?'];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
+  if (Math.abs(x - 7) < 0.0001) {
+    out.innerHTML = `<div class="math" style="border-left-color:#E24B4A">f(7) = (7+1)/(7−7) = 8/<strong>0</strong> = undefined</div><div class="try-note" style="color:#A32D2D">✗ x = 7 is NOT in the domain.</div>`;
+  } else {
+    const top = x + 1, bot = 7 - x, result = (top/bot).toFixed(4).replace(/\.?0+$/,'');
+    out.innerHTML = `<div class="math">f(${x}) = (${x}+1)/(7−${x}) = ${top}/${bot} = <strong>${result}</strong></div><div class="try-note">✓ x = ${x} IS in the domain.</div>`;
+  }
+}
+calcLive();
+</script>
+</body>
+</html>

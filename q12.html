@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q12 — Expanding Logarithms · Math 152</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Question 12 — Expanding Logarithms</div>
+  </div>
+  <div class="nav-right">
+    <a href="index.html" class="nav-btn">← All Questions</a>
+    <a href="q11.html" class="nav-btn">← Q11</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 12 of 12</div>
+    <h1>Expanding Logarithms</h1>
+    <div class="q-box">
+      Express in terms of sums and differences of logarithms (assume all variables positive):<br>
+      <strong>log √(b⁹c)</strong>
+    </div>
+    <div class="fn-pills">
+      <div class="fn-pill">√x = x^(1/2)</div>
+      <div class="fn-pill">log(Mᵖ) = p·log M</div>
+      <div class="fn-pill">log(MN) = log M + log N</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step done"></div>
+    <div class="prog-step active"></div>
+  </div>
+  <span class="prog-count">12 / 12</span>
+</div>
+
+<div class="main">
+
+  <!-- ── SECTION 1: PLAIN ENGLISH ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip blue">① Plain English</div>
+      <span class="sec-sub">what is this question actually asking?</span>
+    </div>
+    <div class="card">
+      <p class="explain-text">
+        "Express in terms of sums and differences" means: <strong>break this one big log apart</strong>
+        into several simpler logs that are added or subtracted. You're going in the opposite direction
+        from combining — you're <em>expanding</em> or <em>splitting</em>.
+      </p>
+      <br>
+      <p class="explain-text">
+        The expression <strong>log √(b⁹c)</strong> looks complicated, but you'll use just 3 rules, applied one at a time:
+      </p>
+      <br>
+      <p class="explain-text">
+        <span class="hl">Step 1</span> — Convert the square root to a power: √ = raise to the ½.<br>
+        <span class="hl">Step 2</span> — Use the <strong>power rule</strong> to pull the ½ out front.<br>
+        <span class="hl">Step 3</span> — Use the <strong>product rule</strong> to split log(b⁹ · c) into two logs.<br>
+        <span class="hl">Step 4</span> — Use the <strong>power rule again</strong> to pull the 9 out of log(b⁹).
+      </p>
+      <br>
+      <p class="explain-text">
+        The final answer will be two terms: one for b and one for c, both multiplied by fractions.
+        No square roots, no products left — just clean simple logs.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: WARMUP ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">② Warmup</div>
+      <span class="sec-sub">3 quick checks before the full solution</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Answer each mini-question, then press Check</div>
+      <div class="wu-grid">
+
+        <!-- W1 -->
+        <div class="wcard" id="wc1">
+          <div class="wq">Rewrite √(x) as a power:<br>√x = x^(?)</div>
+          <div class="wrow">
+            <input id="w1" type="text" placeholder="fraction" style="font-family:var(--mono)" />
+            <button class="wbtn" onclick="checkW(1,'1/2','√x = x^(1/2). Square root = raise to the one-half power.')">Check</button>
+          </div>
+          <div class="wfb" id="wf1"></div>
+        </div>
+
+        <!-- W2 -->
+        <div class="wcard" id="wc2">
+          <div class="wq">Apply power rule:<br>log(b⁹) = ?·log b</div>
+          <div class="wrow">
+            <input id="w2" type="number" placeholder="?" />
+            <button class="wbtn" onclick="checkW(2,'9','Power rule: log(Mᵖ) = p·log M. The exponent 9 comes down front.')">Check</button>
+          </div>
+          <div class="wfb" id="wf2"></div>
+        </div>
+
+        <!-- W3 -->
+        <div class="wcard" id="wc3">
+          <div class="wq">What is ½ × 9 as a fraction?</div>
+          <div class="wrow">
+            <input id="w3" type="text" placeholder="a/b" style="font-family:var(--mono)" />
+            <button class="wbtn" onclick="checkW(3,'9/2','½ × 9 = 9/2. This becomes the coefficient of log b in the final answer.')">Check</button>
+          </div>
+          <div class="wfb" id="wf3"></div>
+        </div>
+
+      </div>
+      <div class="wu-note" id="wu-note" style="display:none">
+        <strong>Ready!</strong> You know that √ = ½ power, the power rule pulls exponents to the front,
+        and ½ × 9 = 9/2. Those are all the pieces you need.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 3: CHEAT SHEET ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">③ Cheat Sheet</div>
+      <span class="sec-sub">all three log rules you need — screenshot this</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top">
+        <div class="cheat-badge">Log Rules</div>
+        <div class="cheat-headline">— expanding a logarithm uses these three</div>
+      </div>
+
+      <div class="cheat-row">
+        <div class="cbadge">Power Rule</div>
+        <div class="ctext"><code>log(Mᵖ) = p · log M</code><br>Exponent moves out front as a multiplier. Works for any base.</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">Product Rule</div>
+        <div class="ctext"><code>log(M · N) = log M + log N</code><br>Multiplication inside the log → addition outside.</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">Quotient Rule</div>
+        <div class="ctext"><code>log(M / N) = log M − log N</code><br>Division inside the log → subtraction outside. (Not needed here but common on exams.)</div>
+      </div>
+      <div class="cheat-row">
+        <div class="cbadge">√ = ½ power</div>
+        <div class="ctext"><code>√(X) = X^(1/2)</code> · <code>∛(X) = X^(1/3)</code> · <code>⁴√(X) = X^(1/4)</code><br>Always convert roots to fractional exponents before applying log rules.</div>
+      </div>
+
+      <div class="cheat-callout">
+        <strong>Order of attack for expanding:</strong><br>
+        1️⃣ Convert all roots to fractional powers &nbsp;→&nbsp;
+        2️⃣ Pull the outer power out front (power rule) &nbsp;→&nbsp;
+        3️⃣ Split products/quotients (product/quotient rule) &nbsp;→&nbsp;
+        4️⃣ Pull any remaining inner powers out front again
+      </div>
+
+      <!-- Quick memory tricks -->
+      <div style="margin-top:14px; border-top:1px solid var(--amber-100); padding-top:12px;">
+        <div class="cheat-top" style="margin-bottom:10px;">
+          <div class="cheat-badge">Memory Tricks</div>
+          <div class="cheat-headline">— fast recall on test day</div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Product</div>
+          <div class="ctext">Log <strong>+</strong> Log = Log of <strong>product</strong> &nbsp;(inside: × → outside: +)</div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Quotient</div>
+          <div class="ctext">Log <strong>−</strong> Log = Log of <strong>division</strong> &nbsp;(inside: ÷ → outside: −)</div>
+        </div>
+        <div class="cheat-row">
+          <div class="cbadge">Power</div>
+          <div class="ctext">Exponent moves to the <strong>front</strong> as a multiplier</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4: STEP-BY-STEP ── -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">④ Step-by-Step Solution</div>
+      <span class="sec-sub">expanding log √(b⁹c) completely</span>
+    </div>
+
+    <div class="solve-card">
+      <div class="part-bar">
+        <div class="part-pill a">Expand</div>
+        <div class="part-name">log √(b⁹c) → sums and differences of logs</div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Convert the square root to a fractional exponent</div>
+          <div class="sdesc">√(anything) = (anything)^(1/2). Rewrite the whole expression under the root.</div>
+          <div class="math">log √(b⁹c) = log(b⁹c)^(1/2)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Apply the Power Rule — bring ½ out front</div>
+          <div class="sdesc">log(Aᵖ) = p · log A. Here A = b⁹c and p = 1/2.</div>
+          <div class="math">= <strong>½</strong> · log(b⁹c)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Apply the Product Rule — split the product inside</div>
+          <div class="sdesc">log(M · N) = log M + log N. Split b⁹ and c apart.</div>
+          <div class="math">= ½ · [log(b⁹) + log c]</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Apply the Power Rule again — bring the 9 out front</div>
+          <div class="sdesc">log(b⁹) = 9 · log b. Pull the exponent 9 to the front.</div>
+          <div class="math">= ½ · [<strong>9 log b</strong> + log c]</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">5</div>
+        <div>
+          <div class="stitle">Distribute the ½ — multiply through</div>
+          <div class="sdesc">½ × 9 = 9/2 &nbsp;·&nbsp; ½ × 1 = 1/2</div>
+          <div class="math">=  <strong>(9/2) log b + (1/2) log c</strong></div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">(9/2) log b + (1/2) log c</div>
+        <div class="ans-pills">
+          <div class="ans-pill">power rule used twice</div>
+          <div class="ans-pill">product rule used once</div>
+          <div class="ans-pill">no roots remain in answer</div>
+        </div>
+      </div>
+
+      <!-- Verification -->
+      <div class="alert-box green">
+        <div class="alert-title">✓ Numerical Check (b = 10, c = 100)</div>
+        <div class="alert-text">
+          <strong>Original:</strong> log √(10⁹ · 100) = log √(10⁹ · 10²) = log √(10¹¹) = log(10^5.5) = <strong>5.5</strong><br>
+          <strong>Our answer:</strong> (9/2)·log 10 + (1/2)·log 100 = 4.5·1 + 0.5·2 = 4.5 + 1 = <strong>5.5 ✓</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE CALCULATOR -->
+    <div class="try-panel">
+      <div class="try-title">Live Calculator</div>
+      <div class="try-sub">Enter values for b and c (positive numbers only). Both sides should match.</div>
+      <div class="try-controls">
+        <span style="font-size:13px;color:var(--muted);">b =</span>
+        <input id="calb" type="number" placeholder="b" value="10" min="0.001" step="any" />
+        <span style="font-size:13px;color:var(--muted);">c =</span>
+        <input id="calc" type="number" placeholder="c" value="100" min="0.001" step="any" />
+        <button class="try-btn" onclick="calcExpand()">Evaluate</button>
+      </div>
+      <div class="try-out" id="outExpand"></div>
+    </div>
+  </div>
+
+  <!-- FINAL REVIEW CALLOUT -->
+  <div class="alert-box teal" style="margin-top:1rem;">
+    <div class="alert-title">🎉 You've completed all 12 questions!</div>
+    <div class="alert-text">
+      You've worked through rational functions, composition, inverses, exponentials, and logarithms.
+      Review the cheat sheets, practice the warmup questions again, and you're ready for the final.
+      Good luck — Prof. Hind's exam will be manageable with this foundation!
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER NAV -->
+<div class="footer-nav">
+  <a href="q11.html" class="fn-link back">← Q11</a>
+  <a href="index.html" class="fn-link next">🏠 All Questions</a>
+</div>
+
+<script>
+  /* ── Warmup ── */
+  let passed = 0;
+  function checkW(n, ans, explanation) {
+    const val = document.getElementById('w'+n).value.trim().replace(/\s/g,'');
+    const fb  = document.getElementById('wf'+n);
+    const card = document.getElementById('wc'+n);
+    if (val === ans) {
+      fb.textContent = '✓ Correct! ' + explanation;
+      fb.className = 'wfb ok';
+      card.classList.add('correct');
+      passed++;
+      if (passed >= 3) document.getElementById('wu-note').style.display = 'block';
+    } else {
+      fb.textContent = '✗ Try again — hint: ' + explanation;
+      fb.className = 'wfb no';
+      card.classList.add('incorrect');
+      setTimeout(() => card.classList.remove('incorrect'), 400);
+    }
+  }
+
+  /* ── Live Calculator ── */
+  function calcExpand() {
+    const b = parseFloat(document.getElementById('calb').value);
+    const c = parseFloat(document.getElementById('calc').value);
+    const out = document.getElementById('outExpand');
+
+    if (isNaN(b) || isNaN(c) || b <= 0 || c <= 0) {
+      out.innerHTML = '<div class="math" style="border-left-color:var(--wrong)">b and c must be positive numbers</div>';
+      return;
+    }
+
+    const original = Math.log10(Math.sqrt(Math.pow(b, 9) * c));
+    const expanded = (9/2) * Math.log10(b) + (1/2) * Math.log10(c);
+    const match = Math.abs(original - expanded) < 0.000001;
+
+    out.innerHTML = `
+      <div class="math">log √(b⁹c) with b=${b}, c=${c}</div>
+      <div class="math">Original:  log √(${b}⁹ × ${c}) = <strong>${original.toFixed(6)}</strong></div>
+      <div class="math">(9/2)·log(${b}) + (1/2)·log(${c})</div>
+      <div class="math"> = ${((9/2)*Math.log10(b)).toFixed(6)} + ${((1/2)*Math.log10(c)).toFixed(6)}</div>
+      <div class="math" style="border-left-color:${match?'var(--correct)':'var(--wrong)'}">
+        Expanded = <strong>${expanded.toFixed(6)}</strong> ${match ? '✓ Both sides match!' : '✗ Mismatch — check inputs'}
+      </div>
+    `;
+  }
+
+  window.onload = () => calcExpand();
+</script>
+</body>
+</html>

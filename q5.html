@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q5 — Rational Equations | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .fraction {
+      display: inline-flex; flex-direction: column;
+      align-items: center; vertical-align: middle;
+      margin: 0 4px; font-family: var(--mono); font-size: 14px; font-weight: 500;
+    }
+    .fraction .num { border-bottom: 2px solid currentColor; padding: 0 4px 2px; }
+    .fraction .den { padding: 2px 4px 0; }
+    .big-eq {
+      background: var(--blue-50); border: 1px solid var(--blue-100);
+      border-radius: var(--rl); padding: 16px 20px; margin: 12px 0;
+      font-size: 18px; font-family: var(--mono); font-weight: 500;
+      color: var(--blue-900); text-align: center; letter-spacing: 0.03em;
+    }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q4.html" class="nav-btn">← Q4</a>
+    <a href="q6.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 5 of 12</div>
+    <h1>Solving a Rational Equation</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Solve for x.
+      <div style="margin-top:12px; font-size:20px; font-family:'DM Mono',monospace; font-weight:500; color:var(--text); text-align:center; letter-spacing:0.02em;">
+        6 / (x + 7) = 8 / x
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        A <strong>rational equation</strong> is any equation that has a variable in a denominator (bottom of a fraction).
+        The strategy: <span class="hl">cross-multiply to kill the fractions</span>, then solve normally.
+      </p>
+
+      <div class="alert-box amber" style="margin:14px 0">
+        <div class="alert-title">Critical rule — restrictions first</div>
+        <div class="alert-text">
+          Before solving, find what x values make any denominator = 0. Those values are <strong>forbidden</strong>.
+          Even if algebra gives you that answer, you must throw it out (it's called an extraneous solution).
+        </div>
+      </div>
+
+      <p class="explain-text">
+        <strong>Cross-multiplication rule:</strong> if you have one fraction = one fraction, you can multiply
+        diagonally — top-left × bottom-right = top-right × bottom-left.
+      </p>
+      <div class="math" style="margin-top:10px; font-size:15px; text-align:center;">
+        a/b = c/d &nbsp; → &nbsp; a·d = b·c
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">fraction and restriction practice</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Skills you need for this problem</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">What value of x makes (x + 7) = 0?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="x = ?" /><button class="wbtn" onclick="chk(1,-7,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">Cross-multiply: 3/x = 6/4. What does 3×4 equal?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,12,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">Solve: 6x = 8(x + 7). First expand right side: 8x + ?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="?" /><button class="wbtn" onclick="chk(3,56,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Notice:</strong> Step 3 is the exact equation you get after cross-multiplying. You already did most of the work.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — rational equations every time</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Rational Equation</div><div class="cheat-headline">— fraction = fraction → cross-multiply</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext"><strong>Find restrictions:</strong> set each denominator <code>= 0</code>, solve. Those x-values are forbidden. Write them down.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Cross-multiply:</strong> <code>top-left × bottom-right = top-right × bottom-left</code>. This removes all fractions.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext"><strong>Expand and simplify.</strong> Combine like terms, get all x on one side.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext"><strong>Solve for x.</strong></div></div>
+      <div class="cheat-row"><div class="cbadge">Step 5</div><div class="ctext"><strong>Check restriction:</strong> if your answer matches a forbidden value, throw it out (no solution). Otherwise, verify in original equation.</div></div>
+      <div class="cheat-callout">
+        Always verify by plugging back into the original. Both sides must give the same number.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet exactly</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Find restrictions (forbidden x-values)</div>
+          <div class="sdesc">Set each denominator = 0 and solve:</div>
+          <div class="math">x + 7 = 0 &nbsp;→&nbsp; x = −7 &nbsp; (forbidden)</div>
+          <div class="math">x = 0 &nbsp; (forbidden)</div>
+          <div class="sdesc" style="margin-top:6px">If our answer turns out to be −7 or 0, we throw it out.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Cross-multiply</div>
+          <div class="sdesc">One fraction = one fraction → multiply diagonally:</div>
+          <div class="math">6 / (x + 7) = 8 / x</div>
+          <div class="math">6 · x = 8 · (x + 7)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Expand the right side</div>
+          <div class="math">6x = 8x + 56</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Solve for x — move x terms to one side</div>
+          <div class="math">6x − 8x = 56</div>
+          <div class="math">−2x = 56</div>
+          <div class="math">x = −28</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Check restriction</div>
+          <div class="sdesc">Our answer is x = −28. Forbidden values were −7 and 0.</div>
+          <div class="math teal">−28 ≠ −7 &nbsp; and &nbsp; −28 ≠ 0 &nbsp; ✓ &nbsp; Allowed!</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">x = −28</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Not an extraneous solution</div>
+          <div class="ans-pill">One valid solution</div>
+        </div>
+      </div>
+
+      <div class="alert-box green">
+        <div class="alert-title">Verify by plugging x = −28 into the original</div>
+        <div class="alert-text">
+          Left side: 6 / (−28 + 7) = 6 / (−21) = −2/7<br>
+          Right side: 8 / (−28) = −2/7<br>
+          −2/7 = −2/7 ✓ &nbsp; Both sides match. Correct.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">Test any value of x</div>
+    <div class="try-sub">See both sides of the equation calculated — they should match when x = −28.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="-28" step="1" />
+      <button class="try-btn" onclick="calcLive()">Calculate</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q4.html" class="fn-link back">← Q4: Systems</a>
+  <a href="q6.html" class="fn-link next">Next: Radical Equations →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = [
+  'Hint: x + 7 = 0 → subtract 7 from both sides',
+  'Hint: 3 × 4 = ?',
+  'Hint: 8 × 7 = ?'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
+  if (Math.abs(x + 7) < 0.001) {
+    out.innerHTML = `<div class="math" style="border-left-color:#E24B4A">x = −7 makes denominator (x+7) = 0 — undefined!</div><div class="try-note" style="color:#A32D2D">✗ Forbidden value.</div>`;
+    return;
+  }
+  if (Math.abs(x) < 0.001) {
+    out.innerHTML = `<div class="math" style="border-left-color:#E24B4A">x = 0 makes denominator = 0 — undefined!</div><div class="try-note" style="color:#A32D2D">✗ Forbidden value.</div>`;
+    return;
+  }
+  const left = 6 / (x + 7);
+  const right = 8 / x;
+  const match = Math.abs(left - right) < 0.0001;
+  const lStr = (left % 1 === 0) ? left.toString() : left.toFixed(4).replace(/\.?0+$/,'');
+  const rStr = (right % 1 === 0) ? right.toString() : right.toFixed(4).replace(/\.?0+$/,'');
+  out.innerHTML = `
+    <div class="math">Left:  6 / (${x} + 7) = 6 / ${x+7} = <strong>${lStr}</strong></div>
+    <div class="math teal">Right: 8 / ${x} = <strong>${rStr}</strong></div>
+    <div class="try-note" style="color:${match ? 'var(--correct)' : '#A32D2D'}">
+      ${match ? '✓ Both sides equal — x = ' + x + ' is the solution!' : '✗ Sides don\'t match. The solution is x = −28.'}
+    </div>`;
+}
+calcLive();
+</script>
+</body>
+</html>

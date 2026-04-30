@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q6 — Radical Equations | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q5.html" class="nav-btn">← Q5</a>
+    <a href="q7.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 6 of 12</div>
+    <h1>Solving a Radical Equation</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Solve for x.
+      <div style="margin-top:12px; font-size:20px; font-family:'DM Mono',monospace; font-weight:500; color:var(--text); text-align:center;">
+        √(x + 9) + 3 = x
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        A <strong>radical equation</strong> has a variable inside a square root. The trick is to 
+        <span class="hl">isolate the root, then square both sides</span> to remove it.
+      </p>
+
+      <div class="alert-box amber" style="margin:14px 0">
+        <div class="alert-title">⚠ Warning — extraneous solutions</div>
+        <div class="alert-text">
+          When you square both sides, you can accidentally create a fake solution. 
+          <strong>Always plug every answer back into the original equation.</strong> 
+          If it doesn't check out, it's extraneous — throw it away.
+        </div>
+      </div>
+
+      <p class="explain-text">
+        <strong>Key algebra fact used here:</strong> (x − 3)² = x² − 6x + 9
+        <br>This is FOIL: (x − 3)(x − 3) = x·x − 3x − 3x + 9
+      </p>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">the exact algebra moves you'll need</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Build the skills before the full solve</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">If √(x+9) = x − 3, what do you get when you square both sides? Inside the root: x + ?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="x + ?" /><button class="wbtn" onclick="chk(1,9,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">Expand (x − 3)². The middle term is −6x. What's the last term?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,9,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">After squaring: x + 9 = x² − 6x + 9. Simplify to 0 = x² − 7x. Factor: 0 = x(x − ?)</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="?" /><button class="wbtn" onclick="chk(3,7,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>The last step gives two possible answers: x = 0 or x = 7.</strong> But one of them is fake (extraneous). The full solve shows why.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — radical equations every time</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Radical Equation</div><div class="cheat-headline">— isolate root, square, check</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext"><strong>Isolate the root:</strong> get <code>√(...) </code> alone on one side. Move everything else to the other side.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Square both sides:</strong> <code>(√A)² = A</code>. The root disappears. Expand the other side carefully — use FOIL if needed.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext"><strong>Solve the resulting equation.</strong> It may be quadratic — factor or use the quadratic formula.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext"><strong>Check EVERY answer</strong> in the original equation. Cross out any that don't work (extraneous solutions).</div></div>
+      <div class="cheat-callout">
+        FOIL reminder: (a − b)² = a² − 2ab + b²<br>
+        (x − 3)² = x² − 6x + 9 &nbsp;|&nbsp; (x + 3)² = x² + 6x + 9
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet exactly</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Isolate the square root</div>
+          <div class="sdesc">Move +3 to the right side:</div>
+          <div class="math">√(x + 9) + 3 = x</div>
+          <div class="math">√(x + 9) = x − 3</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Square both sides</div>
+          <div class="sdesc">Left: (√(x+9))² = x + 9. &nbsp; Right: (x−3)² — use FOIL:</div>
+          <div class="math">(√(x + 9))² = (x − 3)²</div>
+          <div class="math">x + 9 = x² − 6x + 9</div>
+          <div class="sdesc" style="margin-top:6px">FOIL: (x−3)(x−3) = x² − 3x − 3x + 9 = x² − 6x + 9</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Rearrange — get everything on one side</div>
+          <div class="sdesc">Subtract (x + 9) from both sides:</div>
+          <div class="math">0 = x² − 6x + 9 − x − 9</div>
+          <div class="math">0 = x² − 7x</div>
+          <div class="sdesc">Factor out x:</div>
+          <div class="math">0 = x(x − 7)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div>
+          <div class="stitle">Solve — two candidates</div>
+          <div class="math">x = 0 &nbsp; or &nbsp; x = 7</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Check both in the ORIGINAL equation: √(x+9)+3 = x</div>
+          <div class="sdesc" style="margin-bottom:8px"><strong>Check x = 0:</strong></div>
+          <div class="math teal">√(0+9) + 3 = √9 + 3 = 3 + 3 = 6 &nbsp; but right side = 0 &nbsp; 6 ≠ 0 ✗</div>
+          <div class="sdesc" style="margin: 8px 0 8px"><strong>x = 0 is EXTRANEOUS — throw it out.</strong></div>
+          <div class="sdesc" style="margin-bottom:8px"><strong>Check x = 7:</strong></div>
+          <div class="math teal">√(7+9) + 3 = √16 + 3 = 4 + 3 = 7 &nbsp; and right side = 7 &nbsp; ✓</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">x = 7</div>
+        <div class="ans-pills">
+          <div class="ans-pill">x = 0 was extraneous</div>
+          <div class="ans-pill">One valid solution</div>
+          <div class="ans-pill">Always check both</div>
+        </div>
+      </div>
+
+      <div class="alert-box amber">
+        <div class="alert-title">Why does x = 0 fail?</div>
+        <div class="alert-text">
+          When we squared both sides in Step 2, we also accidentally created solutions for √(x+9) = −(x−3). 
+          Squaring hides the sign. That's why x = 0 appeared — it satisfies the squared version but not the original.
+          <strong>This is why checking is mandatory.</strong>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">Test any value of x</div>
+    <div class="try-sub">See both sides of √(x+9)+3 = x. They match only at x = 7.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="7" step="1" />
+      <button class="try-btn" onclick="calcLive()">Calculate</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q5.html" class="fn-link back">← Q5: Rational Equations</a>
+  <a href="q7.html" class="fn-link next">Next: Linear Functions →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = [
+  'Hint: (√A)² = A. So (√(x+9))² = x + ?',
+  'Hint: (x−3)² = x² − 6x + ? ... what is (−3)²?',
+  'Hint: 0 = x² − 7x = x(x − ?)'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
+  const inside = x + 9;
+  if (inside < 0) {
+    out.innerHTML = `<div class="math" style="border-left-color:#E24B4A">√(${x}+9) = √(${inside}) — square root of negative, not real</div>`;
+    return;
+  }
+  const left = Math.sqrt(inside) + 3;
+  const right = x;
+  const match = Math.abs(left - right) < 0.0001;
+  const sqrtVal = Math.sqrt(inside).toFixed(4).replace(/\.?0+$/,'');
+  const leftStr = left.toFixed(4).replace(/\.?0+$/,'');
+  out.innerHTML = `
+    <div class="math">Left: √(${x}+9) + 3 = √${inside} + 3 = ${sqrtVal} + 3 = <strong>${leftStr}</strong></div>
+    <div class="math teal">Right: x = <strong>${right}</strong></div>
+    <div class="try-note" style="color:${match ? 'var(--correct)' : '#A32D2D'}">
+      ${match ? '✓ Both sides equal ' + right + ' — x = ' + x + ' is a solution!' : '✗ Sides don\'t match. Try x = 7.'}
+    </div>`;
+}
+calcLive();
+</script>
+</body>
+</html>

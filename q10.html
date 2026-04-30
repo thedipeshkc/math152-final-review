@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q10 — Slope from a Graph | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    canvas { display:block; border-radius:var(--r); border:1px solid var(--border); background:white; width:100%; max-width:480px; margin-top:12px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q9.html" class="nav-btn">← Q9</a>
+    <a href="q11.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 10 of 12</div>
+    <h1>Slope &amp; Equation from a Graph</h1>
+    <div class="q-box">
+      <strong>Question:</strong> A line passes through the points (0, −2) and (1, −4). Find the slope, y-intercept, and write the equation in slope-intercept form.
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        You're given two points on a line. From those two points you can find <strong>everything</strong> about the line — its steepness, where it crosses the y-axis, and its full equation.
+      </p>
+
+      <div class="rule-grid" style="margin:14px 0">
+        <div class="rule-card note">
+          <div class="rt">Step 1 — Slope</div>
+          Use the slope formula: m = (y₂ − y₁) / (x₂ − x₁). Rise over run.
+        </div>
+        <div class="rule-card note">
+          <div class="rt">Step 2 — Y-intercept</div>
+          One point is (0, −2). When x = 0, that IS the y-intercept. b = −2.
+        </div>
+        <div class="rule-card note">
+          <div class="rt">Step 3 — Equation</div>
+          Plug m and b into y = mx + b.
+        </div>
+      </div>
+
+      <p class="explain-text">
+        <span class="hl">Shortcut for this question:</span> One of the two points given is (0, −2). Whenever one point has x = 0, that point IS the y-intercept — no extra work needed!
+      </p>
+    </div>
+  </div>
+
+  <!-- WARMUP -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">slope formula practice with these exact points</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Points: (0, −2) and (1, −4)</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">y₂ − y₁ = −4 − (−2) = −4 + 2 = ?</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="rise = ?" /><button class="wbtn" onclick="chk(1,-2,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">x₂ − x₁ = 1 − 0 = ?</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="run = ?" /><button class="wbtn" onclick="chk(2,1,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">slope m = rise/run = −2/1 = ?</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="m = ?" /><button class="wbtn" onclick="chk(3,-2,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Rise is −2 and run is 1.</strong> The line drops 2 units for every 1 step right — that's a steep negative slope. Now we have everything to write the equation.</div>
+    </div>
+  </div>
+
+  <!-- CHEAT SHEET -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">find equation of any line from two points</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Line from Two Points</div><div class="cheat-headline">— slope, intercept, equation</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext"><strong>Slope formula:</strong> <code>m = (y₂ − y₁) / (x₂ − x₁)</code>. Label your points, subtract y's on top, subtract x's on bottom. Same order both times.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Y-intercept:</strong> If one point has x = 0, that point's y-value IS b. Otherwise use point-slope form: <code>y − y₁ = m(x − x₁)</code> and solve for b.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext"><strong>Write the equation:</strong> <code>y = mx + b</code>. Plug in your m and b.</div></div>
+      <div class="cheat-row"><div class="cbadge">Verify</div><div class="ctext">Plug both original points into your equation. Both should give true statements.</div></div>
+      <div class="cheat-callout">
+        Negative slope = line falls from left to right.<br>
+        Positive slope = line rises from left to right.<br>
+        Steep line = large |m|. &nbsp; Flat line = m close to 0.
+      </div>
+    </div>
+  </div>
+
+  <!-- SOLVE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">step by step from two points to full equation</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Label the two points</div>
+          <div class="math">(x₁, y₁) = (0, −2) &nbsp;&nbsp; (x₂, y₂) = (1, −4)</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Calculate the slope</div>
+          <div class="math">m = (y₂ − y₁) / (x₂ − x₁)</div>
+          <div class="math">m = (−4 − (−2)) / (1 − 0)</div>
+          <div class="math">m = (−4 + 2) / 1 = −2 / 1 = −2</div>
+          <div class="sdesc" style="margin-top:6px">Negative slope — the line falls as x increases.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Find the y-intercept</div>
+          <div class="sdesc">One point is (0, −2). When x = 0, the y-value IS the y-intercept:</div>
+          <div class="math">b = −2 &nbsp; → &nbsp; y-intercept = (0, −2)</div>
+          <div class="sdesc" style="margin-top:6px">No extra work needed — (0, −2) handed it to us.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">4</div>
+        <div>
+          <div class="stitle">Write slope-intercept form</div>
+          <div class="math teal">y = mx + b</div>
+          <div class="math teal">y = −2x + (−2)</div>
+          <div class="math teal">y = −2x − 2</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Verify with both points</div>
+          <div class="sdesc"><strong>Plug in (0, −2):</strong></div>
+          <div class="math teal">y = −2(0) − 2 = 0 − 2 = −2 ✓</div>
+          <div class="sdesc" style="margin-top:6px"><strong>Plug in (1, −4):</strong></div>
+          <div class="math teal">y = −2(1) − 2 = −2 − 2 = −4 ✓</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">y = −2x − 2</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Slope = −2</div>
+          <div class="ans-pill">Y-intercept = (0, −2)</div>
+          <div class="ans-pill">Both points verified ✓</div>
+        </div>
+      </div>
+
+      <div class="alert-box green">
+        <div class="alert-title">Why the y-intercept was free here</div>
+        <div class="alert-text">
+          One of the given points was (0, −2). The y-intercept is ALWAYS the point where x = 0. So whenever a problem gives you a point with x = 0, that's your b — don't do any extra algebra. It's already done.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">Interactive Graph — y = −2x − 2</div>
+    <div class="try-sub">Type any x to see the point on the line. The two original points are highlighted.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="1" step="1" />
+      <button class="try-btn" onclick="calcLive()">Plot x =</button>
+    </div>
+    <div class="try-out" id="try-out" style="margin-bottom:12px"></div>
+    <canvas id="graph" width="480" height="320"></canvas>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q9.html" class="fn-link back">← Q9: Parallel &amp; Perpendicular</a>
+  <a href="q11.html" class="fn-link next">Next: Logarithms →</a>
+</div>
+
+<script>
+let done = 0;
+let highlightX = 1;
+const hints = [
+  'Hint: −4 − (−2) = −4 + 2 = ?',
+  'Hint: 1 − 0 = ?',
+  'Hint: m = rise/run = −2 / 1 = ?'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+
+function f(x) { return -2*x - 2; }
+
+function drawGraph() {
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2, scale = 22;
+  ctx.clearRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle = '#e4e2d9'; ctx.lineWidth = 1;
+  for (let i=-10;i<=10;i++) {
+    ctx.beginPath();ctx.moveTo(cx+i*scale,0);ctx.lineTo(cx+i*scale,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,cy+i*scale);ctx.lineTo(W,cy+i*scale);ctx.stroke();
+  }
+  // axes
+  ctx.strokeStyle='#6b6a64'; ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
+  // axis labels
+  ctx.fillStyle='#6b6a64'; ctx.font='10px DM Sans,sans-serif'; ctx.textAlign='center';
+  for(let i=-10;i<=10;i++){
+    if(i!==0){
+      ctx.fillText(i,cx+i*scale,cy+14);
+      ctx.textAlign='right';ctx.fillText(-i,cx-6,cy+i*scale+4);ctx.textAlign='center';
+    }
+  }
+  // line y = -2x - 2
+  ctx.strokeStyle='#378ADD'; ctx.lineWidth=2.5;
+  ctx.beginPath();
+  const x0=-W/(2*scale)-1, x1=W/(2*scale)+1;
+  ctx.moveTo(cx+x0*scale,cy-f(x0)*scale);
+  ctx.lineTo(cx+x1*scale,cy-f(x1)*scale);
+  ctx.stroke();
+  // given points
+  [[0,-2,'#378ADD','(0,−2)'],[1,-4,'#0F6E56','(1,−4)']].forEach(([px,py,color,label])=>{
+    ctx.fillStyle=color; ctx.beginPath();ctx.arc(cx+px*scale,cy-py*scale,6,0,2*Math.PI);ctx.fill();
+    ctx.fillStyle=color; ctx.font='11px DM Mono,monospace';
+    ctx.textAlign=px>=0?'left':'right';
+    ctx.fillText(label,cx+px*scale+(px>=0?9:-9),cy-py*scale-8);
+  });
+  // highlighted point
+  const hx=highlightX, hy=f(hx);
+  if(Math.abs(hx)<=0.01&&Math.abs(hy+2)<0.01) return; // skip if on given point
+  if(Math.abs(hx-1)<0.01&&Math.abs(hy+4)<0.01) return;
+  ctx.fillStyle='#EF9F27';
+  ctx.beginPath();ctx.arc(cx+hx*scale,cy-hy*scale,5,0,2*Math.PI);ctx.fill();
+  ctx.fillStyle='#BA7517'; ctx.textAlign=hx>=0?'left':'right';
+  ctx.fillText(`(${hx},${hy})`,cx+hx*scale+(hx>=0?8:-8),cy-hy*scale-8);
+}
+
+function calcLive() {
+  const x=parseFloat(document.getElementById('xval').value);
+  const out=document.getElementById('try-out');
+  if(isNaN(x)){out.innerHTML='<div class="sdesc">Enter a number.</div>';return;}
+  const y=f(x);
+  highlightX=x;
+  drawGraph();
+  out.innerHTML=`
+    <div class="math">y = −2(${x}) − 2 = ${-2*x} − 2 = <strong>${y}</strong></div>
+    <div class="try-note">✓ Point (${x}, ${y}) is on the line y = −2x − 2.</div>`;
+}
+drawGraph();
+calcLive();
+</script>
+</body>
+</html>

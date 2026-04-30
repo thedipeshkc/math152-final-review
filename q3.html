@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q3 — Inverse Functions | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q2.html" class="nav-btn">← Q2</a>
+    <a href="index.html" class="nav-btn primary">All Questions</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 3 of 12</div>
+    <h1>Inverse Functions</h1>
+    <div class="q-box">
+      <strong>Question:</strong> For the one-to-one function f(x) = (1/2)x³ − 5, find the inverse f⁻¹(x).<br>
+      Give the domain and range for both f and f⁻¹.
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        An <strong>inverse function</strong> undoes what the original function did.<br><br>
+        If f takes x in and gives y out, then f⁻¹ takes y in and gives x back.
+      </p>
+      <div class="alert-box teal" style="margin:14px 0">
+        <div class="alert-title">Real life example</div>
+        <div class="alert-text">f = "put on your shoes." &nbsp; f⁻¹ = "take off your shoes." One undoes the other. You end up exactly where you started.</div>
+      </div>
+      <p class="explain-text">
+        The question also asks for <strong>domain</strong> (x values allowed) and <strong>range</strong> (y values that come out).<br><br>
+        <span class="hl">Key rule:</span> Domain of f = Range of f⁻¹, and Range of f = Domain of f⁻¹. They always swap.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">algebra you'll need for the solve</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">Quick algebra checks</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">If y = x + 5, solve for x. What does x equal? (x = y − ?)</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="?" /><button class="wbtn" onclick="chk(1,5,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">If y = x/2, solve for x. (x = y × ?)</div>
+          <div class="wrow"><input type="number" id="w2" placeholder="?" /><button class="wbtn" onclick="chk(2,2,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">What is ∛8? (cube root of 8)</div>
+          <div class="wrow"><input type="number" id="w3" placeholder="?" /><button class="wbtn" onclick="chk(3,2,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Those three steps</strong> — move constants, multiply both sides, take cube root — are exactly what we'll do to find the inverse.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">screenshot this — find any inverse in 4 steps</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Inverse Function</div><div class="cheat-headline">— 4 steps, always the same</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Replace <code>f(x)</code> with <code>y</code>. Now it says <code>y = ...</code></div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext">Swap x and y. Every x → y, every y → x.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Solve for y using algebra. Get y alone on one side.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext">Replace y with <code>f⁻¹(x)</code>. Done.</div></div>
+      <div class="cheat-row"><div class="cbadge">Domain/Range</div><div class="ctext">They swap: Domain of f = Range of f⁻¹. Range of f = Domain of f⁻¹. For a cubic polynomial with no restrictions → both are <code>(-∞, ∞)</code>.</div></div>
+      <div class="cheat-callout">Cube root vs square root: √x needs x ≥ 0. But ∛x works for ANY number including negatives. So ∛(−8) = −2 is totally fine.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">following the cheat sheet</span>
+    </div>
+    <div class="solve-card">
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div><div class="stitle">Replace f(x) with y</div><div class="math">y = (1/2)x³ − 5</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div><div class="stitle">Swap x and y</div><div class="sdesc">Every x becomes y, every y becomes x.</div><div class="math">x = (1/2)y³ − 5</div></div>
+      </div>
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Solve for y — step by step</div>
+          <div class="sdesc">Add 5 to both sides:</div>
+          <div class="math">x + 5 = (1/2)y³</div>
+          <div class="sdesc">Multiply both sides by 2:</div>
+          <div class="math">2(x + 5) = y³</div>
+          <div class="sdesc">Take the cube root of both sides:</div>
+          <div class="math">y = ∛( 2(x + 5) )</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="snum blue">4</div>
+        <div><div class="stitle">Write as f⁻¹(x)</div><div class="math">f⁻¹(x) = ∛( 2(x + 5) )</div></div>
+      </div>
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Domain and range</div>
+          <div class="sdesc">
+            f(x) = (1/2)x³ − 5 is a <strong>cubic polynomial</strong> — no fractions, no square roots. Any x works. Domain = (−∞, ∞). As x goes from −∞ to ∞, so does f(x). Range = (−∞, ∞).<br><br>
+            f⁻¹(x) = ∛(2(x+5)) has a <strong>cube root</strong> — cube roots accept ALL real numbers including negatives. Domain = (−∞, ∞). Range = (−∞, ∞).
+          </div>
+        </div>
+      </div>
+      <div class="answer">
+        <div class="ans-label">Final Answer</div>
+        <div class="ans-val">f⁻¹(x) = ∛(2(x + 5))</div>
+        <table class="dr-table">
+          <thead><tr><th>Function</th><th>Domain</th><th>Range</th></tr></thead>
+          <tbody>
+            <tr><td>f(x) = (1/2)x³ − 5</td><td>(−∞, ∞)</td><td>(−∞, ∞)</td></tr>
+            <tr><td>f⁻¹(x) = ∛(2(x+5))</td><td>(−∞, ∞)</td><td>(−∞, ∞)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert-box green">
+        <div class="alert-title">How to verify your inverse is correct</div>
+        <div class="alert-text">
+          Plug f(x) into f⁻¹ — you should get x back.<br>
+          f⁻¹(f(x)) = ∛(2((1/2)x³−5+5)) = ∛(2·(1/2)x³) = ∛(x³) = x ✓
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="try-panel">
+    <div class="try-title">Test it yourself</div>
+    <div class="try-sub">Enter any x. See f(x) calculated, then watch f⁻¹ give you x right back.</div>
+    <div class="try-controls">
+      <input type="number" id="xval" value="2" step="1" />
+      <button class="try-btn" onclick="calcLive()">Calculate</button>
+    </div>
+    <div class="try-out" id="try-out"></div>
+  </div>
+</div>
+
+<div class="footer-nav">
+  <a href="q2.html" class="fn-link back">← Q2: Composition</a>
+  <a href="index.html" class="fn-link home">All Questions →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = ['Hint: x = y − 5, so subtract 5 from both sides','Hint: multiply both sides by 2 to cancel the /2','Hint: 2×2×2 = 8, so ∛8 = ?'];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+function calcLive() {
+  const x = parseFloat(document.getElementById('xval').value);
+  const out = document.getElementById('try-out');
+  if (isNaN(x)) { out.innerHTML = '<div class="sdesc">Enter a number.</div>'; return; }
+  const fx = (0.5*Math.pow(x,3)-5).toFixed(4).replace(/\.?0+$/,'');
+  const fxn = parseFloat(fx);
+  const inv = Math.cbrt(2*(fxn+5)).toFixed(4).replace(/\.?0+$/,'');
+  out.innerHTML = `
+    <div class="math">f(${x}) = (1/2)(${x})³ − 5 = <strong>${fx}</strong></div>
+    <div class="math teal">f⁻¹(${fx}) = ∛(2·(${fx}+5)) = <strong>${inv}</strong></div>
+    <div class="try-note">✓ f⁻¹ gives back ≈ ${x} — the inverse perfectly undoes f!</div>`;
+}
+calcLive();
+</script>
+</body>
+</html>

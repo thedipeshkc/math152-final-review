@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q9 — Parallel &amp; Perpendicular Lines | Math 152 Final Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    canvas { display:block; border-radius:var(--r); border:1px solid var(--border); background:white; width:100%; max-width:480px; margin-top:12px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div>
+    <div class="nav-course">Math 152 — College Algebra · Prof. Caleb Hind</div>
+    <div class="nav-title">Final Exam Review</div>
+  </div>
+  <div class="nav-right">
+    <a href="q8.html" class="nav-btn">← Q8</a>
+    <a href="q10.html" class="nav-btn primary">Next →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="q-badge"><div class="q-dot"></div> Question 9 of 12</div>
+    <h1>Parallel &amp; Perpendicular Lines</h1>
+    <div class="q-box">
+      <strong>Question:</strong> Write equations for two lines through the point (3, −2):
+      <div class="fn-pills" style="margin-top:10px">
+        <div class="fn-pill">Parallel to 3x + 4y = 7</div>
+        <div class="fn-pill">Perpendicular to 3x + 4y = 7</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <span class="prog-label">Progress</span>
+  <div class="prog-track">
+    <div class="prog-step active" id="p1"></div>
+    <div class="prog-step" id="p2"></div>
+    <div class="prog-step" id="p3"></div>
+    <div class="prog-step" id="p4"></div>
+  </div>
+  <span class="prog-count" id="prog-count">0 / 3 warmups</span>
+</div>
+
+<div class="main">
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="sec-header"><div class="sec-chip blue">01 &nbsp; What is this asking?</div></div>
+    <div class="card">
+      <p class="explain-text">
+        Given one line, find two new lines that both pass through the same point — 
+        one running <strong>parallel</strong> (same direction) and one running <strong>perpendicular</strong> (crossing at 90°).
+      </p>
+
+      <div class="rule-grid" style="margin:14px 0">
+        <div class="rule-card note">
+          <div class="rt">Parallel slope</div>
+          Same slope as original. Same direction. Never cross.
+        </div>
+        <div class="rule-card note">
+          <div class="rt">Perpendicular slope</div>
+          Negative reciprocal: flip the fraction, change the sign.
+        </div>
+      </div>
+
+      <p class="explain-text" style="margin-bottom:8px"><strong>Negative reciprocal rule:</strong></p>
+      <div class="math">If slope = −3/4, &nbsp; perpendicular slope = 4/3</div>
+      <div class="math">If slope = 3, &nbsp; perpendicular slope = −1/3</div>
+
+      <p class="explain-text" style="margin-top:12px">
+        Then use <strong>point-slope form</strong> to build the equation: <span class="hl">y − y₁ = m(x − x₁)</span>
+      </p>
+
+      <div class="alert-box amber" style="margin-top:12px">
+        <div class="alert-title">Tip — see Q7 cheat sheet</div>
+        <div class="alert-text">Q7 has the full slope reference covering all forms, parallel, and perpendicular conditions. Check it if you need a refresher.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARMUP -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip green">02 &nbsp; Warmup</div>
+      <span class="sec-sub">extract slope from standard form, find reciprocal</span>
+    </div>
+    <div class="warmup-wrap">
+      <div class="wu-title">The moves you need</div>
+      <div class="wu-grid">
+        <div class="wcard" id="wc1">
+          <div class="wq">Solve 3x + 4y = 7 for y. What is the slope? (numerator only — answer: −?)</div>
+          <div class="wrow"><input type="number" id="w1" placeholder="−?" /><button class="wbtn" onclick="chk(1,-3,'w1','fb1','wc1')">Check</button></div>
+          <div class="wfb" id="fb1"></div>
+        </div>
+        <div class="wcard" id="wc2">
+          <div class="wq">Slope of parallel line to 3x+4y=7 is also −3/4. As decimal: −0.?</div>
+          <div class="wrow"><input type="number" id="w2" step="0.01" placeholder="−0.?" /><button class="wbtn" onclick="chk(2,-0.75,'w2','fb2','wc2')">Check</button></div>
+          <div class="wfb" id="fb2"></div>
+        </div>
+        <div class="wcard" id="wc3">
+          <div class="wq">Negative reciprocal of −3/4 is 4/3. Plug point (3,−2) and slope 4/3 into y−y₁=m(x−x₁). What is b (y-intercept)?</div>
+          <div class="wrow"><input type="number" id="w3" step="1" placeholder="b = ?" /><button class="wbtn" onclick="chk(3,-6,'w3','fb3','wc3')">Check</button></div>
+          <div class="wfb" id="fb3"></div>
+        </div>
+      </div>
+      <div class="wu-note"><strong>Those three answers are the slope of the original, slope of parallel, and y-intercept of perpendicular.</strong> You have all the pieces.</div>
+    </div>
+  </div>
+
+  <!-- CHEAT SHEET -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip amber">03 &nbsp; Cheat sheet</div>
+      <span class="sec-sub">parallel and perpendicular through a point</span>
+    </div>
+    <div class="cheat">
+      <div class="cheat-top"><div class="cheat-badge">Parallel &amp; Perpendicular</div><div class="cheat-headline">— 4 steps</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 1</div><div class="ctext">Get the original line into <code>y = mx + b</code> form. Read off slope m.</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 2</div><div class="ctext"><strong>Parallel:</strong> same slope m. &nbsp; <strong>Perpendicular:</strong> slope = <code>−1/m</code> (flip fraction, change sign).</div></div>
+      <div class="cheat-row"><div class="cbadge">Step 3</div><div class="ctext">Use point-slope form with your new slope and the given point (x₁, y₁):<br><code>y − y₁ = m(x − x₁)</code></div></div>
+      <div class="cheat-row"><div class="cbadge">Step 4</div><div class="ctext">Solve for y to get slope-intercept form <code>y = mx + b</code>.</div></div>
+      <div class="cheat-callout">Check: plug the given point into your final equation — it must satisfy it.</div>
+    </div>
+  </div>
+
+  <!-- SOLVE -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-chip teal">04 &nbsp; Solve it</div>
+      <span class="sec-sub">both parts, step by step</span>
+    </div>
+    <div class="solve-card">
+
+      <div class="step">
+        <div class="snum blue">1</div>
+        <div>
+          <div class="stitle">Get slope from 3x + 4y = 7</div>
+          <div class="sdesc">Solve for y:</div>
+          <div class="math">4y = −3x + 7</div>
+          <div class="math">y = (−3/4)x + 7/4</div>
+          <div class="sdesc" style="margin-top:6px">Original slope: <strong>m = −3/4</strong></div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="part-bar"><div class="part-pill a">Part A</div><div class="part-name">Parallel line through (3, −2)</div></div>
+
+      <div class="step">
+        <div class="snum blue">2</div>
+        <div>
+          <div class="stitle">Parallel slope = same slope</div>
+          <div class="math">m_parallel = −3/4</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum blue">3</div>
+        <div>
+          <div class="stitle">Point-slope form with (3, −2)</div>
+          <div class="math">y − (−2) = (−3/4)(x − 3)</div>
+          <div class="math">y + 2 = (−3/4)x + 9/4</div>
+          <div class="math">y = (−3/4)x + 9/4 − 2</div>
+          <div class="math">y = (−3/4)x + 9/4 − 8/4</div>
+          <div class="math">y = (−3/4)x + 1/4</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Answer — Part A (Parallel)</div>
+        <div class="ans-val">y = −(3/4)x + 1/4</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Same slope −3/4</div>
+          <div class="ans-pill">Passes through (3,−2) ✓</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div class="part-bar"><div class="part-pill b">Part B</div><div class="part-name">Perpendicular line through (3, −2)</div></div>
+
+      <div class="step">
+        <div class="snum teal">4</div>
+        <div>
+          <div class="stitle">Perpendicular slope = negative reciprocal of −3/4</div>
+          <div class="sdesc">Flip the fraction: 3/4 → 4/3. Change the sign: −3/4 → +4/3.</div>
+          <div class="math teal">m_perp = 4/3</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="snum teal">5</div>
+        <div>
+          <div class="stitle">Point-slope form with (3, −2)</div>
+          <div class="math teal">y − (−2) = (4/3)(x − 3)</div>
+          <div class="math teal">y + 2 = (4/3)x − 4</div>
+          <div class="math teal">y = (4/3)x − 4 − 2</div>
+          <div class="math teal">y = (4/3)x − 6</div>
+        </div>
+      </div>
+
+      <div class="answer">
+        <div class="ans-label">Answer — Part B (Perpendicular)</div>
+        <div class="ans-val">y = (4/3)x − 6</div>
+        <div class="ans-pills">
+          <div class="ans-pill">Slope 4/3 (neg. reciprocal of −3/4)</div>
+          <div class="ans-pill">Passes through (3,−2) ✓</div>
+          <div class="ans-pill">Check: (4/3)(3)−6 = 4−6 = −2 ✓</div>
+        </div>
+      </div>
+
+      <div class="alert-box green">
+        <div class="alert-title">Verify perpendicular: slopes multiply to −1</div>
+        <div class="alert-text">
+          (−3/4) × (4/3) = −12/12 = −1 ✓ &nbsp; That's how you confirm two lines are perpendicular.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- GRAPH CALCULATOR -->
+  <div class="try-panel">
+    <div class="try-title">See all three lines graphed</div>
+    <div class="try-sub">Original (blue), parallel (green), perpendicular (amber). All pass through or relate to (3, −2).</div>
+    <canvas id="graph" width="480" height="320"></canvas>
+  </div>
+
+</div>
+
+<div class="footer-nav">
+  <a href="q8.html" class="fn-link back">← Q8: Distance Formula</a>
+  <a href="q10.html" class="fn-link next">Next: Slope from Graph →</a>
+</div>
+
+<script>
+let done = 0;
+const hints = [
+  'Hint: 3x + 4y = 7 → 4y = −3x + 7 → y = (−3/4)x + 7/4. Slope numerator = ?',
+  'Hint: −3/4 = −0.75',
+  'Hint: y − (−2) = (4/3)(x − 3) → y = (4/3)x − 4 − 2 = ?'
+];
+function chk(q, correct, inp, fb, card) {
+  const val = parseFloat(document.getElementById(inp).value);
+  const f = document.getElementById(fb), c = document.getElementById(card);
+  if (isNaN(val)) { f.textContent = 'Enter a number first.'; f.className = 'wfb no'; return; }
+  if (Math.abs(val - correct) < 0.01) {
+    f.textContent = '✓ Correct!'; f.className = 'wfb ok';
+    c.classList.add('correct'); c.classList.remove('incorrect');
+    done++; updateProgress();
+  } else {
+    f.textContent = hints[q-1]; f.className = 'wfb no';
+    c.classList.add('incorrect'); setTimeout(() => c.classList.remove('incorrect'), 400);
+  }
+}
+function updateProgress() {
+  document.getElementById('prog-count').textContent = done + ' / 3 warmups';
+  ['p1','p2','p3','p4'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (done > i) { el.classList.add('done'); el.classList.remove('active'); }
+    else if (done === i) { el.classList.add('active'); el.classList.remove('done'); }
+  });
+}
+
+(function drawGraph(){
+  const canvas = document.getElementById('graph');
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  const cx=W/2, cy=H/2, scale=24;
+
+  ctx.clearRect(0,0,W,H);
+  // grid
+  ctx.strokeStyle='#e4e2d9'; ctx.lineWidth=1;
+  for(let i=-10;i<=10;i++){
+    ctx.beginPath();ctx.moveTo(cx+i*scale,0);ctx.lineTo(cx+i*scale,H);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,cy+i*scale);ctx.lineTo(W,cy+i*scale);ctx.stroke();
+  }
+  // axes
+  ctx.strokeStyle='#6b6a64'; ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
+
+  function drawLine(m,b,color,label){
+    ctx.strokeStyle=color; ctx.lineWidth=2.5;
+    ctx.beginPath();
+    const x0=(-W/2)/scale-1, x1=(W/2)/scale+1;
+    ctx.moveTo(cx+x0*scale, cy-(m*x0+b)*scale);
+    ctx.lineTo(cx+x1*scale, cy-(m*x1+b)*scale);
+    ctx.stroke();
+    // label at right edge
+    const lx=(W/2)/scale-1.5;
+    const ly=m*lx+b;
+    ctx.fillStyle=color; ctx.font='bold 11px DM Sans,sans-serif'; ctx.textAlign='left';
+    ctx.fillText(label, cx+lx*scale+4, cy-ly*scale);
+  }
+
+  // original: 3x+4y=7 → y = (-3/4)x + 7/4
+  drawLine(-3/4, 7/4, '#378ADD', 'original');
+  // parallel: y = (-3/4)x + 1/4
+  drawLine(-3/4, 1/4, '#0F6E56', 'parallel');
+  // perpendicular: y = (4/3)x − 6
+  drawLine(4/3, -6, '#EF9F27', 'perpendicular');
+
+  // point (3,-2)
+  ctx.fillStyle='#A32D2D'; ctx.beginPath(); ctx.arc(cx+3*scale,cy+2*scale,7,0,2*Math.PI); ctx.fill();
+  ctx.fillStyle='#A32D2D'; ctx.font='bold 12px DM Mono,monospace'; ctx.textAlign='left';
+  ctx.fillText('(3,−2)', cx+3*scale+9, cy+2*scale-6);
+})();
+</script>
+</body>
+</html>
